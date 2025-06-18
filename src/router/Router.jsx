@@ -21,9 +21,9 @@ const Router = () => {
             <Route path='/' element={<Layout/>}>
                 <Route path='/' element={<Home/>}/>
                 <Route path='/add' element={<Add/>}/>
-                <Route path='/gig' element={<Gig/>}/>
+                <Route path='/gig/:id' element={<Gig/>}/>
                 <Route path='/gigs' element={<Gigs/>}/>
-                <Route path='/message' element={<Message/>}/>
+                <Route path='/message/:id' element={<Message/>}/>
                 <Route path='/messages' element={<Messages/>}/>
                 <Route path='/myGigs' element={<MyGigs/>}/>
                 <Route path='/orders' element={<Orders/>}/>
