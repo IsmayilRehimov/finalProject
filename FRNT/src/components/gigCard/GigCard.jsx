@@ -1,0 +1,76 @@
+import React, { useState } from "react";
+import "./GigCard.scss";
+import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import newRequest from "../../utils/newRequest";
+
+const GigCard = ({ item }) => {
+  const { isLoading, error, data } = useQuery({
+    queryKey: [item.userId],
+    queryFn: () =>
+      newRequest.get(`/users/${item.userId}`).then((res) => res.data),
+  });
+
+  const [liked, setLiked] = useState(false);
+
+  const toggleLike = (e) => {
+    e.preventDefault();
+    setLiked((prev) => !prev);
+  };
+
+  // Ortalama puan hesaplama
+  const averageRating =
+    !isNaN(item.totalStars / item.starNumber) && item.starNumber > 0
+      ? (item.totalStars / item.starNumber).toFixed(1)
+      : null;
+
+  return (
+    <Link to={`/gig/${item._id}`} className="link">
+      <div className="gigCard">
+        <img src={item.cover} alt="" />
+
+        <div className="info">
+          {isLoading ? (
+            "loading"
+          ) : error ? (
+            "Something went wrong!"
+          ) : (
+            <div className="user">
+              <img src={data.img || "/img/noavatar.jpg"} alt="" />
+              <span>{data.username}</span>
+            </div>
+          )}
+
+          <p className="desc">{item.desc}</p>
+
+          <div className="star">
+            {averageRating && (
+              <>
+                <img src="./img/star.png" alt="star" />
+                <span>{averageRating}</span>
+                <span className="count">({item.starNumber})</span>
+              </>
+            )}
+          </div>
+        </div>
+
+        <hr />
+
+        <div className="detail">
+          <img
+            src="./img/heart.png"
+            alt="like"
+            onClick={toggleLike}
+            className={liked ? "liked" : ""}
+          />
+          <div className="price">
+            <span>STARTING AT</span>
+            <h2>$ {item.price}</h2>
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+};
+
+export default GigCard;

@@ -1,0 +1,127 @@
+.explore {
+  display: flex;
+  justify-content: center;
+  padding: 100px 0;
+
+  .container {
+    width: 1400px;
+
+    h1 {
+      color: #555;
+      margin-bottom: 50px;
+      text-align: center;
+    }
+
+    .items {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 30px;
+      row-gap: 40px;
+      justify-content: center; // Küçük ekranlar için ortalama
+
+      .item {
+        width: 250px;
+        height: 150px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        cursor: pointer;
+
+        img {
+          width: 50px;
+          height: 50px;
+        }
+
+        .line {
+          width: 50px;
+          height: 2px;
+          background-color: lightgray;
+          transition: all 0.3s ease;
+        }
+
+        span {
+          font-weight: 300;
+        }
+
+        &:hover {
+          .line {
+            width: 80px;
+            background-color: #1dbf73;
+          }
+        }
+      }
+    }
+  }
+
+  // Tablet görünümü
+  @media (max-width: 992px) {
+    padding: 80px 20px;
+
+    .container {
+      width: 100%;
+
+      .items {
+        gap: 20px;
+        row-gap: 30px;
+
+        .item {
+          width: 200px;
+          height: 130px;
+
+          img {
+            width: 40px;
+            height: 40px;
+          }
+
+          .line {
+            width: 40px;
+          }
+
+          &:hover {
+            .line {
+              width: 60px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Mobil görünümü
+  @media (max-width: 768px) {
+    padding: 60px 20px;
+
+    .container {
+      .items {
+        gap: 15px;
+        row-gap: 20px;
+        justify-content: center;
+
+        .item {
+          width: 150px;
+          height: 120px;
+
+          img {
+            width: 35px;
+            height: 35px;
+          }
+
+          .line {
+            width: 30px;
+          }
+
+          &:hover {
+            .line {
+              width: 50px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

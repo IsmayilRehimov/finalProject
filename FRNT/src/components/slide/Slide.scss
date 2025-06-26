@@ -1,0 +1,100 @@
+div.slide {
+  display: flex;
+  justify-content: center;
+  padding: 100px 0;
+
+  .container {
+    width: 1400px;
+    position: relative;
+
+    .carousel-track {
+      display: flex;
+      gap: 20px;
+    }
+  }
+
+  .carousel-initialized {
+    position: static;
+  }
+
+  .carousel-prev,
+  .carousel-next {
+    width: 50px;
+    height: 50px;
+    background-color: rgb(243, 243, 243);
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: rgb(220, 220, 220);
+    }
+  }
+
+  .carousel-prev {
+    left: -25px;
+  }
+
+  .carousel-next {
+    right: -25px;
+  }
+
+  @media (max-width: 992px) {
+    padding: 80px 20px;
+
+    .container {
+      width: 100%;
+
+      .carousel-track {
+        gap: 15px;
+      }
+    }
+
+    .carousel-prev,
+    .carousel-next {
+      width: 40px;
+      height: 40px;
+    }
+
+    .carousel-prev {
+      left: -20px;
+    }
+
+    .carousel-next {
+      right: -20px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 60px 10px;
+
+    .container {
+      width: 100%;
+
+      .carousel-track {
+        gap: 10px;
+      }
+    }
+
+    .carousel-prev,
+    .carousel-next {
+      width: 35px;
+      height: 35px;
+    }
+
+    .carousel-prev {
+      left: -15px;
+    }
+
+    .carousel-next {
+      right: -15px;
+    }
+  }
+}

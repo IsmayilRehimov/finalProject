@@ -1,0 +1,186 @@
+.message {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+
+  .container {
+    width: 1200px;
+    max-width: 95%;
+    margin: 50px 0;
+
+    .breadcrumbs {
+      font-weight: 300;
+      font-size: 13px;
+      color: #555;
+    }
+
+    .messages {
+      margin: 30px 0;
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      height: 500px;
+      overflow-y: auto;
+      background-color: #f9f9f9;
+      border-radius: 10px;
+
+      .item {
+        display: flex;
+        gap: 20px;
+        max-width: 600px;
+        font-size: 18px;
+
+        &.owner {
+          flex-direction: row-reverse;
+          align-self: flex-end;
+
+          p {
+            max-width: 500px;
+            border-radius: 20px 0 20px 20px;
+            background-color: royalblue;
+            color: white;
+          }
+        }
+
+        img {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+
+        p {
+          max-width: 500px;
+          padding: 20px;
+          background-color: rgb(244, 241, 241);
+          border-radius: 0 20px 20px 20px;
+          color: gray;
+          font-weight: 300;
+        }
+      }
+    }
+
+    hr {
+      height: 0;
+      border: 0.5px solid rgb(232, 230, 230);
+      margin-bottom: 20px;
+    }
+
+    .write {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+
+      textarea {
+        width: 80%;
+        min-width: 200px;
+        height: 100px;
+        padding: 10px;
+        border: 1px solid lightgray;
+        border-radius: 10px;
+        resize: none;
+      }
+
+      button {
+        background-color: #1dbf73;
+        padding: 20px;
+        color: white;
+        font-weight: 500;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        width: 100px;
+        transition: 0.3s ease;
+
+        &:hover {
+          background-color: #159c5c;
+        }
+      }
+    }
+  }
+
+  // Tablet Ekranlar (768px və aşağı)
+  @media (max-width: 768px) {
+    .container {
+      margin: 30px 0;
+
+      .messages {
+        padding: 30px;
+        height: 400px;
+        gap: 15px;
+
+        .item {
+          max-width: 100%;
+          font-size: 16px;
+
+          p {
+            max-width: 100%;
+            padding: 15px;
+            font-size: 14px;
+          }
+
+          img {
+            width: 35px;
+            height: 35px;
+          }
+        }
+      }
+
+      .write {
+        flex-direction: column;
+        align-items: stretch;
+
+        textarea {
+          width: 100%;
+        }
+
+        button {
+          width: 100%;
+          padding: 15px;
+        }
+      }
+    }
+  }
+
+  // Mobil Ekranlar (480px və aşağı)
+  @media (max-width: 480px) {
+    .container {
+      .messages {
+        padding: 20px;
+        height: 300px;
+        gap: 10px;
+
+        .item {
+          font-size: 14px;
+          gap: 10px;
+
+          p {
+            padding: 12px;
+            font-size: 13px;
+          }
+
+          img {
+            width: 30px;
+            height: 30px;
+          }
+        }
+      }
+
+      .write {
+        gap: 10px;
+
+        textarea {
+          height: 80px;
+        }
+
+        button {
+          padding: 12px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
