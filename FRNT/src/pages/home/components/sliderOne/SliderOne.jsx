@@ -19,7 +19,7 @@ const SliderOne = ({ gigs, isLoading, error }) => {
       }
     };
 
-    handleResize(); // İlk yüklemede çalışsın
+    handleResize(); 
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);

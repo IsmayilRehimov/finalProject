@@ -19,7 +19,7 @@ const SliderTwo = ({ gigs, isLoading, error }) => {
       }
     };
 
-    handleResize(); // Sayfa ilk açıldığında çalışsın
+    handleResize();
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);

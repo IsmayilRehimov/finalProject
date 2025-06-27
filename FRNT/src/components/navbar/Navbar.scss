@@ -159,8 +159,9 @@
     flex-wrap: wrap;
     gap: 10px;
   }
+  
 
-  // Tablet və Mobil üçün Fiverr tərzində responsive
+
   @media (max-width: 1024px) {
     .container {
       flex-direction: column;

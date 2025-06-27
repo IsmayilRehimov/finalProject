@@ -107,14 +107,12 @@
     }
 
     .cards {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       gap: 20px;
     }
   }
 
-  // Tablet üçün responsiv
   @media (max-width: 768px) {
     .container {
       h1 {
@@ -148,12 +146,11 @@
       }
 
       .cards {
-        justify-content: center;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       }
     }
   }
 
-  // Mobil üçün responsiv
   @media (max-width: 480px) {
     .container {
       h1 {
@@ -190,7 +187,7 @@
       }
 
       .cards {
-        justify-content: center;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
       }
     }
   }

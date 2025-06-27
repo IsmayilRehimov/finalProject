@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 20px; // kiçik ekranlarda boşluq üçün
+  padding: 40px 20px; 
 
   form {
     width: 360px;
@@ -49,7 +49,7 @@
     }
   }
 
-  // Tablet responsive (768px - 1024px)
+ 
   @media (min-width: 768px) and (max-width: 1024px) {
     form {
       width: 80%;
@@ -72,7 +72,7 @@
     }
   }
 
-  // Mobil responsive (480px-dən aşağı)
+
   @media (max-width: 480px) {
     form {
       width: 100%;

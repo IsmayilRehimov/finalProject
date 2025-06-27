@@ -64,7 +64,7 @@ function Gigs() {
     }
   };
 
-  // Lokal olaraq sıralanmış datanı hesablamaq üçün useMemo
+
   const sortedData = useMemo(() => {
     if (!data) return [];
 

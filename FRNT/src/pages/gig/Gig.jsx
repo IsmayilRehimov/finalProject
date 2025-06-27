@@ -1,13 +1,14 @@
 import React from "react";
 import "./Gig.scss";
 import { Slider } from "infinite-react-carousel/lib";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import newRequest from "../../utils/newRequest";
 import Reviews from "../../components/reviews/Reviews";
 
 function Gig() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const { isLoading, error, data } = useQuery({
     queryKey: ["gig"],
@@ -22,7 +23,7 @@ function Gig() {
     error: errorUser,
     data: dataUser,
   } = useQuery({
-    queryKey: ["user"],
+    queryKey: ["user", userId],
     queryFn: () =>
       newRequest.get(`/users/${userId}`).then((res) => res.data),
     enabled: !!userId,
@@ -32,6 +33,17 @@ function Gig() {
     !isNaN(data?.totalStars / data?.starNumber) && data?.starNumber > 0
       ? (data.totalStars / data.starNumber).toFixed(1)
       : null;
+
+  const handleContact = async () => {
+    try {
+      const res = await newRequest.post(`/conversations`, {
+        to: dataUser._id, // Karşı tarafın id'si
+      });
+      navigate(`/message/${res.data.id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="gig">
@@ -60,11 +72,28 @@ function Gig() {
                 />
                 <span>{dataUser.username}</span>
                 {averageRating && (
-                  <div className="stars" style={{ display: "flex", alignItems: "center", marginLeft: "10px" }}>
-                    <img src="/img/star.png" alt="star" style={{ width: "16px", height: "16px", marginRight: "5px" }} />
+                  <div
+                    className="stars"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      marginLeft: "10px",
+                    }}
+                  >
+                    <img
+                      src="/img/star.png"
+                      alt="star"
+                      style={{
+                        width: "16px",
+                        height: "16px",
+                        marginRight: "5px",
+                      }}
+                    />
                     <span style={{ fontWeight: "bold" }}>
                       {averageRating}{" "}
-                      <span style={{ color: "#555", fontWeight: "normal" }}>
+                      <span
+                        style={{ color: "#555", fontWeight: "normal" }}
+                      >
                         ({data.starNumber})
                       </span>
                     </span>
@@ -94,19 +123,34 @@ function Gig() {
                   <div className="info">
                     <span>{dataUser.username}</span>
                     {averageRating && (
-                      <div className="stars" style={{ display: "flex", alignItems: "center", marginTop: "5px" }}>
-                        <img src="/img/star.png" alt="star" style={{ width: "16px", height: "16px", marginRight: "5px" }} />
+                      <div
+                        className="stars"
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          marginTop: "5px",
+                        }}
+                      >
+                        <img
+                          src="/img/star.png"
+                          alt="star"
+                          style={{
+                            width: "16px",
+                            height: "16px",
+                            marginRight: "5px",
+                          }}
+                        />
                         <span style={{ fontWeight: "bold" }}>
                           {averageRating}{" "}
-                          <span style={{ color: "#555", fontWeight: "normal" }}>
+                          <span
+                            style={{ color: "#555", fontWeight: "normal" }}
+                          >
                             ({data.starNumber} reviews)
                           </span>
                         </span>
                       </div>
                     )}
-                    <Link to={`/message/${dataUser._id}`}>
-                      <button>Contact Me</button>
-                    </Link>
+                    <button onClick={handleContact}>Contact Me</button>
                   </div>
                 </div>
                 <div className="box">

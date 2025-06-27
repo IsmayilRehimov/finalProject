@@ -1,19 +1,17 @@
-// src/pages/pay/Pay.jsx
-
 import React, { useEffect, useState } from "react";
 import "./Pay.scss";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import newRequest from "../../utils/newRequest"; // Axios instance
+import newRequest from "../../utils/newRequest"; 
 import { useParams } from "react-router-dom";
 import CheckoutForm from "../../components/checkoutForm/CheckoutForm";
 
-// Stripe publishable key – dashboard'dan alınıb
+
 const stripePromise = loadStripe("pk_test_51RaF0jCXqofpnsjryC3REwcxTrOgfmtKIPJV3ClMApQrD5vTLd36DTRWkTmDWbh4gRXpMAFukUselTSzZr9Jj15r00ZAYapOM2");
 
 const Pay = () => {
   const [clientSecret, setClientSecret] = useState("");
-  const { id } = useParams(); // Gig ID
+  const { id } = useParams(); 
 
   useEffect(() => {
     const makeRequest = async () => {

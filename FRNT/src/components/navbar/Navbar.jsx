@@ -60,7 +60,10 @@ function Navbar() {
         </div>
 
         <div className="links">
-          
+          <Link to="/favorites">Favorites</Link> 
+          <Link className="link" to="/messages">
+            Messages
+          </Link>         
           {!currentUser?.isSeller && <span>Become a Seller</span>}
           {currentUser ? (
             <div className="user" onClick={() => setOpen(!open)}>

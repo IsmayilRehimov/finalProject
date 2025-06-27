@@ -1,24 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import "./GigCard.scss";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import newRequest from "../../utils/newRequest";
+import { useFavorites } from "../../context/FavoritesContext";
 
 const GigCard = ({ item }) => {
   const { isLoading, error, data } = useQuery({
     queryKey: [item.userId],
-    queryFn: () =>
-      newRequest.get(`/users/${item.userId}`).then((res) => res.data),
+    queryFn: () => newRequest.get(`/users/${item.userId}`).then((res) => res.data),
   });
 
-  const [liked, setLiked] = useState(false);
+  const { favorites, toggleFavorite } = useFavorites();
+  const liked = favorites.some((f) => f._id === item._id);
 
-  const toggleLike = (e) => {
-    e.preventDefault();
-    setLiked((prev) => !prev);
-  };
-
-  // Ortalama puan hesaplama
   const averageRating =
     !isNaN(item.totalStars / item.starNumber) && item.starNumber > 0
       ? (item.totalStars / item.starNumber).toFixed(1)
@@ -27,16 +22,16 @@ const GigCard = ({ item }) => {
   return (
     <Link to={`/gig/${item._id}`} className="link">
       <div className="gigCard">
-        <img src={item.cover} alt="" />
+        <img src={item.cover} alt="gig" />
 
         <div className="info">
           {isLoading ? (
-            "loading"
+            "Loading..."
           ) : error ? (
             "Something went wrong!"
           ) : (
             <div className="user">
-              <img src={data.img || "/img/noavatar.jpg"} alt="" />
+              <img src={data.img || "/img/noavatar.jpg"} alt="user" />
               <span>{data.username}</span>
             </div>
           )}
@@ -60,7 +55,10 @@ const GigCard = ({ item }) => {
           <img
             src="./img/heart.png"
             alt="like"
-            onClick={toggleLike}
+            onClick={(e) => {
+              e.preventDefault();
+              toggleFavorite(item);
+            }}
             className={liked ? "liked" : ""}
           />
           <div className="price">

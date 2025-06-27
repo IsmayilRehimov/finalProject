@@ -240,7 +240,7 @@
     }
   }
 
-  // Tablet üçün (max-width: 992px)
+ 
   @media (max-width: 992px) {
     .container {
       flex-direction: column;
@@ -258,7 +258,6 @@
     }
   }
 
-  // Mobil üçün (max-width: 576px)
   @media (max-width: 576px) {
     .container {
       .left {
