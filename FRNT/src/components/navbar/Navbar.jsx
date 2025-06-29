@@ -7,8 +7,11 @@ function Navbar() {
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
+  const [unreadCount, setUnreadCount] = useState(0);
 
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
   const isActive = () => {
     setActive(window.scrollY > 0);
@@ -19,8 +22,23 @@ function Navbar() {
     return () => window.removeEventListener("scroll", isActive);
   }, []);
 
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  const navigate = useNavigate();
+  useEffect(() => {
+    const fetchUnreadCount = async () => {
+      if (currentUser) {
+        try {
+          const res = await newRequest.get(`/messages/unread-count`);
+          setUnreadCount(res.data.count);
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    };
+
+    fetchUnreadCount();
+
+    const interval = setInterval(fetchUnreadCount, 10000); // 10 saniyede bir güncelle
+    return () => clearInterval(interval);
+  }, [currentUser]);
 
   const handleLogout = async () => {
     try {
@@ -60,10 +78,17 @@ function Navbar() {
         </div>
 
         <div className="links">
-          <Link to="/favorites">Favorites</Link> 
-          <Link className="link" to="/messages">
-            Messages
-          </Link>         
+          <Link to="/favorites">Favorites</Link>
+
+          <div className="messagesLink">
+            <Link className="link" to="/messages">
+              Messages
+            </Link>
+            {unreadCount > 0 && (
+              <span className="unreadBadge">{unreadCount}</span>
+            )}
+          </div>
+
           {!currentUser?.isSeller && <span>Become a Seller</span>}
           {currentUser ? (
             <div className="user" onClick={() => setOpen(!open)}>
@@ -73,31 +98,19 @@ function Navbar() {
                 <div className="options">
                   {currentUser.isSeller && (
                     <>
-                      <Link className="link" to="/mygigs">
-                        Gigs
-                      </Link>
-                      <Link className="link" to="/add">
-                        Add New Gig
-                      </Link>
+                      <Link className="link" to="/mygigs">Gigs</Link>
+                      <Link className="link" to="/add">Add New Gig</Link>
                     </>
                   )}
-                  <Link className="link" to="/orders">
-                    Orders
-                  </Link>
-                  <Link className="link" to="/messages">
-                    Messages
-                  </Link>
-                  <Link className="link" onClick={handleLogout}>
-                    Logout
-                  </Link>
+                  <Link className="link" to="/orders">Orders</Link>
+                  <Link className="link" to="/messages">Messages</Link>
+                  <Link className="link" onClick={handleLogout}>Logout</Link>
                 </div>
               )}
             </div>
           ) : (
             <>
-              <Link to="/login" className="link">
-                Sign in
-              </Link>
+              <Link to="/login" className="link">Sign in</Link>
               <Link className="link" to="/register">
                 <button>Join</button>
               </Link>
@@ -110,30 +123,14 @@ function Navbar() {
         <>
           <hr />
           <div className="menu">
-            <Link className="link menuLink" to="/gigs?cat=design">
-              Graphics & Design
-            </Link>
-            <Link className="link menuLink" to="/gigs?cat=animation">
-              Video & Animation
-            </Link>
-            <Link className="link menuLink" to="/gigs?cat=music">
-              Music & Audio
-            </Link>
-            <Link className="link menuLink" to="/gigs?cat=web">
-              Programming & Development
-            </Link>
-            <Link className="link menuLink" to="/gigs?cat=digital">
-              Digital Marketing
-            </Link>
-            <Link className="link menuLink" to="/gigs?cat=business">
-              Business
-            </Link>
-            <Link className="link menuLink" to="/gigs?cat=lifestyle">
-              Lifestyle
-            </Link>
-            <Link className="link menuLink" to="/gigs?cat=writing">
-              Writing & Translate
-            </Link>
+            <Link className="link menuLink" to="/gigs?cat=design">Graphics & Design</Link>
+            <Link className="link menuLink" to="/gigs?cat=animation">Video & Animation</Link>
+            <Link className="link menuLink" to="/gigs?cat=music">Music & Audio</Link>
+            <Link className="link menuLink" to="/gigs?cat=web">Programming & Development</Link>
+            <Link className="link menuLink" to="/gigs?cat=digital">Digital Marketing</Link>
+            <Link className="link menuLink" to="/gigs?cat=business">Business</Link>
+            <Link className="link menuLink" to="/gigs?cat=lifestyle">Lifestyle</Link>
+            <Link className="link menuLink" to="/gigs?cat=writing">Writing & Translate</Link>
           </div>
           <hr />
         </>

@@ -1,3 +1,4 @@
+// Gig.jsx
 import React from "react";
 import "./Gig.scss";
 import { Slider } from "infinite-react-carousel/lib";
@@ -36,10 +37,16 @@ function Gig() {
 
   const handleContact = async () => {
     try {
-      const res = await newRequest.post(`/conversations`, {
-        to: dataUser._id, // Karşı tarafın id'si
-      });
-      navigate(`/message/${res.data.id}`);
+      const res = await newRequest.get(`/conversations/single/${dataUser._id}`);
+
+      if (res.data) {
+        navigate(`/message/${res.data.id}`);
+      } else {
+        const newConv = await newRequest.post(`/conversations`, {
+          to: dataUser._id,
+        });
+        navigate(`/message/${newConv.data.id}`);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -74,28 +81,15 @@ function Gig() {
                 {averageRating && (
                   <div
                     className="stars"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      marginLeft: "10px",
-                    }}
+                    style={{ display: "flex", alignItems: "center", marginLeft: "10px" }}
                   >
                     <img
                       src="/img/star.png"
                       alt="star"
-                      style={{
-                        width: "16px",
-                        height: "16px",
-                        marginRight: "5px",
-                      }}
+                      style={{ width: "16px", height: "16px", marginRight: "5px" }}
                     />
                     <span style={{ fontWeight: "bold" }}>
-                      {averageRating}{" "}
-                      <span
-                        style={{ color: "#555", fontWeight: "normal" }}
-                      >
-                        ({data.starNumber})
-                      </span>
+                      {averageRating} <span style={{ color: "#555", fontWeight: "normal" }}>({data.starNumber})</span>
                     </span>
                   </div>
                 )}
@@ -123,30 +117,14 @@ function Gig() {
                   <div className="info">
                     <span>{dataUser.username}</span>
                     {averageRating && (
-                      <div
-                        className="stars"
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          marginTop: "5px",
-                        }}
-                      >
+                      <div className="stars" style={{ display: "flex", alignItems: "center", marginTop: "5px" }}>
                         <img
                           src="/img/star.png"
                           alt="star"
-                          style={{
-                            width: "16px",
-                            height: "16px",
-                            marginRight: "5px",
-                          }}
+                          style={{ width: "16px", height: "16px", marginRight: "5px" }}
                         />
                         <span style={{ fontWeight: "bold" }}>
-                          {averageRating}{" "}
-                          <span
-                            style={{ color: "#555", fontWeight: "normal" }}
-                          >
-                            ({data.starNumber} reviews)
-                          </span>
+                          {averageRating} <span style={{ color: "#555", fontWeight: "normal" }}>({data.starNumber} reviews)</span>
                         </span>
                       </div>
                     )}

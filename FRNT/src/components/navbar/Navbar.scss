@@ -91,6 +91,27 @@
         white-space: nowrap;
       }
 
+      .messagesLink {
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        .unreadBadge {
+          position: absolute;
+          top: -8px;
+          right: -10px;
+          background-color: crimson;
+          color: white;
+          font-size: 11px;
+          padding: 2px 6px;
+          border-radius: 50%;
+          font-weight: bold;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+
       .user {
         display: flex;
         align-items: center;
@@ -104,7 +125,6 @@
           border-radius: 50%;
           object-fit: cover;
         }
-        
 
         .options {
           position: absolute;
@@ -159,8 +179,6 @@
     flex-wrap: wrap;
     gap: 10px;
   }
-  
-
 
   @media (max-width: 1024px) {
     .container {
@@ -183,7 +201,6 @@
     }
 
     .menu {
-
       justify-content: center;
     }
   }

@@ -1,10 +1,30 @@
 import express from "express";
 import { deleteUser, getUser } from "../controllers/user.controller.js";
 import { verifyToken } from "../middleware/jwt.js";
+import User from "../models/user.model.js";
 
 const router = express.Router();
 
 router.delete("/:id", verifyToken, deleteUser);
 router.get("/:id", getUser);
+
+// 🔥 Toplu kullanıcı bilgisi alma endpointi
+router.post("/batch", verifyToken, async (req, res, next) => {
+  try {
+    const ids = req.body.ids;
+    if (!ids || !Array.isArray(ids)) {
+      return res.status(400).send("IDs array is required.");
+    }
+
+    const users = await User.find(
+      { _id: { $in: ids } },
+      "username _id img"
+    );
+
+    res.status(200).send(users);
+  } catch (err) {
+    next(err);
+  }
+});
 
 export default router;
