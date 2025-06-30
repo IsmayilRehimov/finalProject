@@ -20,6 +20,7 @@ import NotFound from "./pages/notFound/NotFound";
 import Favorites from "./pages/favorites/Favorites";
 import { FavoritesProvider } from "./context/FavoritesContext";
 import UserProfile from "./pages/userProfile/UserProfile";
+import Profile from "./pages/profile/Profile";
 
 function App() {
   const queryClient = new QueryClient();
@@ -42,6 +43,7 @@ function App() {
       element: <Layout />,
       children: [
         { path: "/", element: <Home /> },
+        { path: "/profile", element: <Profile /> },
         { path: "/gigs", element: <Gigs /> },
         { path: "/myGigs", element: <MyGigs /> },
         { path: "/orders", element: <Orders /> },

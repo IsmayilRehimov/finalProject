@@ -1,5 +1,5 @@
 import express from "express";
-import { deleteUser, getUser } from "../controllers/user.controller.js";
+import { deleteUser, getUser, updateUser } from "../controllers/user.controller.js";
 import { verifyToken } from "../middleware/jwt.js";
 import User from "../models/user.model.js";
 
@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.delete("/:id", verifyToken, deleteUser);
 router.get("/:id", getUser);
+router.put("/:id", verifyToken, updateUser); // 🌟 Kullanıcı güncelleme eklendi
 
 // 🔥 Toplu kullanıcı bilgisi alma endpointi
 router.post("/batch", verifyToken, async (req, res, next) => {

@@ -7,7 +7,7 @@ const FeaturesDark = () => {
       <div className="container">
         <div className="item">
           <h1>
-            Quickerr <i>business</i>
+            FreeWell <i>business</i>
           </h1>
           <h1>
             A business solution designed for <i>teams</i>
@@ -27,7 +27,7 @@ const FeaturesDark = () => {
             <img src="./img/check.png" alt="" />
             Manage teamwork and boost productivity with one workspace
           </div>
-          <button>Explore Fiverr Business</button>
+          <button>Explore FreeWell Business</button>
         </div>
         <div className="item">
           <img

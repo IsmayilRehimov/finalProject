@@ -12,8 +12,7 @@ function Gig() {
 
   const { isLoading, error, data } = useQuery({
     queryKey: ["gig"],
-    queryFn: () =>
-      newRequest.get(`/gigs/single/${id}`).then((res) => res.data),
+    queryFn: () => newRequest.get(`/gigs/single/${id}`).then((res) => res.data),
   });
 
   const userId = data?.userId;
@@ -24,8 +23,7 @@ function Gig() {
     data: dataUser,
   } = useQuery({
     queryKey: ["user", userId],
-    queryFn: () =>
-      newRequest.get(`/users/${userId}`).then((res) => res.data),
+    queryFn: () => newRequest.get(`/users/${userId}`).then((res) => res.data),
     enabled: !!userId,
   });
 
@@ -61,7 +59,7 @@ function Gig() {
         <div className="container">
           <div className="left">
             <span className="breadcrumbs">
-              Fiverr {">"} Graphics & Design {">"}
+              FreeWell {">"} Graphics & Design {">"}
             </span>
             <h1>{data.title}</h1>
 
@@ -80,7 +78,11 @@ function Gig() {
                 />
                 <span
                   onClick={() => navigate(`/user/${dataUser._id}`)}
-                  style={{ cursor: "pointer", color: "#1dbf73", marginLeft: "10px" }}
+                  style={{
+                    cursor: "pointer",
+                    color: "#1dbf73",
+                    marginLeft: "10px",
+                  }}
                 >
                   {dataUser.username}
                 </span>
@@ -104,9 +106,7 @@ function Gig() {
                     />
                     <span style={{ fontWeight: "bold" }}>
                       {averageRating}{" "}
-                      <span
-                        style={{ color: "#555", fontWeight: "normal" }}
-                      >
+                      <span style={{ color: "#555", fontWeight: "normal" }}>
                         ({data.starNumber})
                       </span>
                     </span>
@@ -165,9 +165,7 @@ function Gig() {
                         />
                         <span style={{ fontWeight: "bold" }}>
                           {averageRating}{" "}
-                          <span
-                            style={{ color: "#555", fontWeight: "normal" }}
-                          >
+                          <span style={{ color: "#555", fontWeight: "normal" }}>
                             ({data.starNumber} reviews)
                           </span>
                         </span>
@@ -184,8 +182,14 @@ function Gig() {
                     </div>
                     <div className="item">
                       <span className="title">Member since</span>
-                      <span className="desc">June 2024</span>
+                      <span className="desc">
+                        {new Date(dataUser.createdAt).toLocaleString(
+                          "default",
+                          { month: "long", year: "numeric" }
+                        )}
+                      </span>
                     </div>
+
                     <div className="item">
                       <span className="title">Avg. response time</span>
                       <span className="desc">4 hours</span>

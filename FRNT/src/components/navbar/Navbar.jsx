@@ -61,7 +61,7 @@ function Navbar() {
       <div className="container">
         <div className="logo">
           <Link className="link" to="/">
-            <span className="text">Quickerr</span>
+            <span className="text">FreeWell</span>
           </Link>
           <span className="dot">.</span>
         </div>
@@ -79,7 +79,6 @@ function Navbar() {
 
         <div className="links">
           <Link to="/favorites">Favorites</Link>
-
           <div className="messagesLink">
             <Link className="link" to="/messages">
               Messages
@@ -96,6 +95,7 @@ function Navbar() {
               <span>{currentUser?.username}</span>
               {open && (
                 <div className="options">
+                  <Link className="link" to="/profile">Profile</Link>
                   {currentUser.isSeller && (
                     <>
                       <Link className="link" to="/mygigs">Gigs</Link>

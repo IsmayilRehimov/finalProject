@@ -94,7 +94,7 @@ function Gigs() {
   return (
     <div className="gigs">
       <div className="container">
-        <span className="breadcrumbs">Quickerr &gt; {getCatName()} &gt;</span>
+        <span className="breadcrumbs">FreeWell &gt; {getCatName()} &gt;</span>
         <h1>{getCatName()}</h1>
         <p>Explore the best gigs from top freelancers in {getCatName()}!</p>
 
