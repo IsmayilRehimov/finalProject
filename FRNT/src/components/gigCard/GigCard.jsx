@@ -8,21 +8,20 @@ import { useFavorites } from "../../context/FavoritesContext";
 const GigCard = ({ item }) => {
   const { isLoading, error, data } = useQuery({
     queryKey: [item.userId],
-    queryFn: () => newRequest.get(`/users/${item.userId}`).then((res) => res.data),
+    queryFn: () =>
+      newRequest.get(`/users/${item.userId}`).then((res) => res.data),
   });
 
   const { favorites, toggleFavorite } = useFavorites();
   const liked = favorites.some((f) => f._id === item._id);
 
   const averageRating =
-    !isNaN(item.totalStars / item.starNumber) && item.starNumber > 0
-      ? (item.totalStars / item.starNumber).toFixed(1)
-      : null;
+    item.starNumber > 0 ? (item.totalStars / item.starNumber).toFixed(1) : 0;
 
   return (
     <Link to={`/gig/${item._id}`} className="link">
       <div className="gigCard">
-        <img src={item.cover} alt="gig" />
+        <img src={item.cover || "/img/noimage.jpg"} alt="gig" />
 
         <div className="info">
           {isLoading ? (
@@ -39,13 +38,9 @@ const GigCard = ({ item }) => {
           <p className="desc">{item.desc}</p>
 
           <div className="star">
-            {averageRating && (
-              <>
-                <img src="./img/star.png" alt="star" />
-                <span>{averageRating}</span>
-                <span className="count">({item.starNumber})</span>
-              </>
-            )}
+            <img src="/img/star.png" alt="star" />
+            <span>{averageRating}</span>
+            <span className="count">({item.starNumber || 0})</span>
           </div>
         </div>
 
@@ -53,7 +48,7 @@ const GigCard = ({ item }) => {
 
         <div className="detail">
           <img
-            src="./img/heart.png"
+            src="/img/heart.png"
             alt="like"
             onClick={(e) => {
               e.preventDefault();

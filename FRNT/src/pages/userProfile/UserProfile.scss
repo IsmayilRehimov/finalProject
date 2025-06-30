@@ -1,0 +1,136 @@
+.userProfile {
+  display: flex;
+  justify-content: center;
+  padding: 50px 0;
+
+  .container {
+    width: 1400px;
+    max-width: 95%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    .userInfo {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+
+      .profilePic {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .details {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        flex: 1;
+
+        h2 {
+          font-size: 24px;
+        }
+
+        .additionalInfo {
+          display: flex;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 20px;
+          font-size: 14px;
+          color: #555;
+
+          span {
+            display: flex;
+            align-items: center;
+            
+            b {
+              color: black;
+              margin-right: 5px;
+            }
+          }
+
+          .averageRating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+
+    .userGigs {
+      h2 {
+        margin-bottom: 20px;
+      }
+
+      .gigsList {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 20px;
+      }
+    }
+  }
+}
+
+/* Tablet üçün */
+@media (max-width: 992px) {
+  .userProfile {
+    padding: 30px 0;
+
+    .container {
+      .userInfo {
+        flex-direction: column;
+        align-items: flex-start;
+
+        .profilePic {
+          width: 80px;
+          height: 80px;
+        }
+
+        .details {
+          h2 {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Mobil üçün */
+@media (max-width: 576px) {
+  .userProfile {
+    padding: 20px 0;
+
+    .container {
+      .userInfo {
+        .profilePic {
+          width: 70px;
+          height: 70px;
+        }
+
+        .details {
+          h2 {
+            font-size: 18px;
+          }
+
+          .additionalInfo {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+          }
+        }
+      }
+
+      .userGigs {
+        h2 {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}

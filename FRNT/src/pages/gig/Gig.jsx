@@ -1,4 +1,3 @@
-// Gig.jsx
 import React from "react";
 import "./Gig.scss";
 import { Slider } from "infinite-react-carousel/lib";
@@ -55,7 +54,7 @@ function Gig() {
   return (
     <div className="gig">
       {isLoading ? (
-        "loading"
+        "Loading..."
       ) : error ? (
         "Something went wrong!"
       ) : (
@@ -67,7 +66,7 @@ function Gig() {
             <h1>{data.title}</h1>
 
             {isLoadingUser ? (
-              "loading"
+              "Loading..."
             ) : errorUser ? (
               "Something went wrong!"
             ) : (
@@ -76,20 +75,40 @@ function Gig() {
                   className="pp"
                   src={dataUser.img || "/img/noavatar.jpg"}
                   alt=""
+                  onClick={() => navigate(`/user/${dataUser._id}`)}
+                  style={{ cursor: "pointer" }}
                 />
-                <span>{dataUser.username}</span>
+                <span
+                  onClick={() => navigate(`/user/${dataUser._id}`)}
+                  style={{ cursor: "pointer", color: "#1dbf73", marginLeft: "10px" }}
+                >
+                  {dataUser.username}
+                </span>
                 {averageRating && (
                   <div
                     className="stars"
-                    style={{ display: "flex", alignItems: "center", marginLeft: "10px" }}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      marginLeft: "10px",
+                    }}
                   >
                     <img
                       src="/img/star.png"
                       alt="star"
-                      style={{ width: "16px", height: "16px", marginRight: "5px" }}
+                      style={{
+                        width: "16px",
+                        height: "16px",
+                        marginRight: "5px",
+                      }}
                     />
                     <span style={{ fontWeight: "bold" }}>
-                      {averageRating} <span style={{ color: "#555", fontWeight: "normal" }}>({data.starNumber})</span>
+                      {averageRating}{" "}
+                      <span
+                        style={{ color: "#555", fontWeight: "normal" }}
+                      >
+                        ({data.starNumber})
+                      </span>
                     </span>
                   </div>
                 )}
@@ -106,25 +125,51 @@ function Gig() {
             <p>{data.desc}</p>
 
             {isLoadingUser ? (
-              "loading"
+              "Loading..."
             ) : errorUser ? (
               "Something went wrong!"
             ) : (
               <div className="seller">
                 <h2>About The Seller</h2>
                 <div className="user">
-                  <img src={dataUser.img || "/img/noavatar.jpg"} alt="" />
+                  <img
+                    src={dataUser.img || "/img/noavatar.jpg"}
+                    alt=""
+                    onClick={() => navigate(`/user/${dataUser._id}`)}
+                    style={{ cursor: "pointer" }}
+                  />
                   <div className="info">
-                    <span>{dataUser.username}</span>
+                    <span
+                      onClick={() => navigate(`/user/${dataUser._id}`)}
+                      style={{ cursor: "pointer", color: "#1dbf73" }}
+                    >
+                      {dataUser.username}
+                    </span>
                     {averageRating && (
-                      <div className="stars" style={{ display: "flex", alignItems: "center", marginTop: "5px" }}>
+                      <div
+                        className="stars"
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          marginTop: "5px",
+                        }}
+                      >
                         <img
                           src="/img/star.png"
                           alt="star"
-                          style={{ width: "16px", height: "16px", marginRight: "5px" }}
+                          style={{
+                            width: "16px",
+                            height: "16px",
+                            marginRight: "5px",
+                          }}
                         />
                         <span style={{ fontWeight: "bold" }}>
-                          {averageRating} <span style={{ color: "#555", fontWeight: "normal" }}>({data.starNumber} reviews)</span>
+                          {averageRating}{" "}
+                          <span
+                            style={{ color: "#555", fontWeight: "normal" }}
+                          >
+                            ({data.starNumber} reviews)
+                          </span>
                         </span>
                       </div>
                     )}

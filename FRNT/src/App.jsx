@@ -19,6 +19,7 @@ import Success from "./pages/success/Success";
 import NotFound from "./pages/notFound/NotFound";
 import Favorites from "./pages/favorites/Favorites";
 import { FavoritesProvider } from "./context/FavoritesContext";
+import UserProfile from "./pages/userProfile/UserProfile";
 
 function App() {
   const queryClient = new QueryClient();
@@ -53,6 +54,8 @@ function App() {
         { path: "/pay/:id", element: <Pay /> },
         { path: "/success", element: <Success /> },
         { path: "/favorites", element: <Favorites /> },
+        { path:"/user/:id", element:<UserProfile />},
+
         { path: "*", element: <NotFound /> },
       ],
     },
