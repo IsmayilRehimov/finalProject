@@ -22,6 +22,7 @@ import { FavoritesProvider } from "./context/FavoritesContext";
 import UserProfile from "./pages/userProfile/UserProfile";
 import Profile from "./pages/profile/Profile";
 import newRequest from "./utils/newRequest";
+import AdminPanel from "./pages/adminPanel/AdminPanel";
 
 function App() {
   const queryClient = new QueryClient();
@@ -105,6 +106,7 @@ useEffect(() => {
         { path: "/success", element: <Success /> },
         { path: "/favorites", element: <Favorites /> },
         { path: "/user/:id", element: <UserProfile /> },
+        { path: "/admin", element: <AdminPanel /> },
         { path: "*", element: <NotFound /> },
       ],
     },

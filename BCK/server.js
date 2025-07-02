@@ -11,6 +11,7 @@ import authRoute from "./routes/auth.route.js";
 import favoriteRoute from "./routes/favorite.route.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import adminRoute from "./routes/admin.route.js";
 
 const app = express();
 dotenv.config();
@@ -37,6 +38,7 @@ app.use("/api/conversations", conversationRoute);
 app.use("/api/messages", messageRoute);
 app.use("/api/reviews", reviewRoute);
 app.use("/api/favorites", favoriteRoute);
+app.use("/api/admin", adminRoute);
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;

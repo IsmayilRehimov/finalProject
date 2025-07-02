@@ -31,6 +31,7 @@ export const login = async (req, res, next) => {
       {
         id: user._id,
         isSeller: user.isSeller,
+        role: user.role, // Include role
       },
       process.env.JWT_KEY
     );

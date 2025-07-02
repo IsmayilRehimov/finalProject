@@ -10,9 +10,8 @@ const userSchema = new Schema({
   phone: { type: String },
   desc: { type: String },
   isSeller: { type: Boolean, default: false },
-  darkMode: { type: Boolean, default: false }, // 🌟 eklendi
+  darkMode: { type: Boolean, default: false },
+  role: { type: String, enum: ["user", "admin"], default: "user" }, 
 }, { timestamps: true });
 
-
-
-export default mongoose.model("User", userSchema)
+export default mongoose.model("User", userSchema);
