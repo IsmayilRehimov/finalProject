@@ -164,3 +164,53 @@
     }
   }
 }
+
+.app.dark .secOne {
+  /* Video və overlay artıq tünd olduğu üçün fon dəyişməyə bilər */
+  
+  .overlay {
+    /* Overlay-dəki gradient qalır, colors isə açıq saxlanır */
+    
+    .content {
+      color: #eee;
+
+      h1 {
+        color: #fff;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9);
+      }
+
+      p {
+        color: #ccc;
+      }
+
+      .placeholders {
+        span {
+          color: #fff;
+          background: rgba(255, 255, 255, 0.1);
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.2);
+          }
+        }
+      }
+    }
+
+    .trustedBy {
+      color: #ccc;
+
+      span {
+        color: #bbb;
+      }
+
+      .logos {
+        img {
+          opacity: 0.7;
+
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,8 +1,10 @@
 .footer {
+  background-color: white;
   display: flex;
   justify-content: center;
   color: #666;
-  margin: 50px 0;
+  padding-top: 50px;
+  
 
   img {
     width: 24px;
@@ -139,6 +141,47 @@
           flex-direction: column;
           align-items: flex-start;
           gap: 10px;
+        }
+      }
+    }
+  }
+}
+
+.app.dark .footer {
+  background-color: #1a1a1a;
+  color: #ccc;
+
+  .container {
+    .top {
+      .item {
+        h2 {
+          color: #f1f1f1;
+        }
+
+        span {
+          color: #bbb;
+        }
+      }
+    }
+
+    hr {
+      border-color: #333;
+    }
+
+    .bottom {
+      .left {
+        span {
+          color: #aaa;
+        }
+      }
+
+      .right {
+        .link {
+          color: #ccc;
+        }
+
+        .social img {
+          filter: brightness(0) invert(1);
         }
       }
     }

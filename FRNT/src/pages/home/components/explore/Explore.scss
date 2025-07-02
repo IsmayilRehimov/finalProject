@@ -125,3 +125,32 @@
     }
   }
 }
+
+
+.app.dark .explore {
+  background-color: #1a1a1a;
+
+  .container {
+    h1 {
+      color: #f1f1f1;
+    }
+
+    .items {
+      .item {
+        .line {
+          background-color: #444;
+        }
+
+        span {
+          color: #ccc;
+        }
+
+        &:hover {
+          .line {
+            background-color: #1dbf73;
+          }
+        }
+      }
+    }
+  }
+}

@@ -62,6 +62,10 @@
           font-weight: 500;
           border-radius: 5px;
           cursor: pointer;
+
+          &:hover {
+            background-color: #19a463;
+          }
         }
       }
 
@@ -101,6 +105,10 @@
 
           span {
             cursor: pointer;
+
+            &:hover {
+              color: #1dbf73;
+            }
           }
         }
       }
@@ -189,6 +197,78 @@
       .cards {
         grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
       }
+    }
+  }
+}
+
+/* DARK MODE */
+
+.app.dark .gigs {
+  background-color: #1a1a1a;
+  color: #f1f1f1;
+
+  .container {
+    .breadcrumbs {
+      color: #aaa;
+    }
+
+    h1 {
+      color: #f1f1f1;
+    }
+
+    p {
+      color: #ccc;
+    }
+
+    .menu {
+      .left {
+        color: #ccc;
+
+        input {
+          background-color: #2a2a2a;
+          color: #f1f1f1;
+          border: 1px solid #444;
+
+          &::placeholder {
+            color: #888;
+          }
+        }
+
+        button {
+          background-color: #1dbf73;
+          color: white;
+
+          &:hover {
+            background-color: #19a463;
+          }
+        }
+      }
+
+      .right {
+        .sortBy {
+          color: #aaa;
+        }
+
+        .sortType {
+          color: #f1f1f1;
+        }
+
+        .rightMenu {
+          background-color: #2a2a2a;
+          border: 1px solid #444;
+          color: #f1f1f1;
+
+          span {
+            &:hover {
+              color: #1dbf73;
+            }
+          }
+        }
+      }
+    }
+
+    .cards {
+      // optional: cards background or border in dark mode if needed
     }
   }
 }

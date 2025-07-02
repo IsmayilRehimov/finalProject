@@ -15,9 +15,10 @@ function Login() {
     try {
       const res = await newRequest.post("/auth/login", { username, password });
       localStorage.setItem("currentUser", JSON.stringify(res.data));
-      navigate("/")
+      // Tətbiqi tam sıfırlayıb ana səhifəyə yönləndirir:
+      window.location.href = "/";
     } catch (err) {
-      setError(err.response.data);
+      setError(err.response?.data || "Login failed");
     }
   };
 
@@ -25,22 +26,27 @@ function Login() {
     <div className="login">
       <form onSubmit={handleSubmit}>
         <h1>Sign in</h1>
-        <label htmlFor="">Username</label>
+
+        <label>Username</label>
         <input
           name="username"
           type="text"
-          placeholder=""
+          placeholder="Enter your username"
           onChange={(e) => setUsername(e.target.value)}
+          required
         />
 
-        <label htmlFor="">Password</label>
+        <label>Password</label>
         <input
           name="password"
           type="password"
+          placeholder="Enter your password"
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
+
         <button type="submit">Login</button>
-        {error && error}
+        {error && <p className="error">{error}</p>}
       </form>
     </div>
   );

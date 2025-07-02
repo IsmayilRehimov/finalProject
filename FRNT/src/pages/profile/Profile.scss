@@ -149,3 +149,70 @@
     }
   }
 }
+
+
+
+
+.app.dark {
+  background-color: #1a1a1a;  // sayfa arkası tamamen siyah
+  color: #f1f1f1;
+
+  .profileContainer {
+    background-color: #1a1a1a;  // içerik kutusu koyu gri kalabilir
+  }
+
+  .profileSidebar {
+    background: #2a2a2a;
+    border-color: #444;
+
+    h3, p {
+      color: #f1f1f1;
+    }
+
+    button {
+      background: #1dbf73;
+      color: white;
+
+      &:hover {
+        background: #159b5d;
+      }
+    }
+  }
+
+  .profileForm {
+    background: #2a2a2a;
+    border-color: #444;
+
+    h2 {
+      color: #f1f1f1;
+    }
+
+    label {
+      color: #f1f1f1;
+    }
+
+    input,
+    textarea {
+      background: #1a1a1a;
+      color: #f1f1f1;
+      border-color: #555;
+    }
+
+    button {
+      background: #1dbf73;
+
+      &:hover {
+        background: #159b5d;
+      }
+
+      &.deleteBtn {
+        background: #ff4d4d;
+
+        &:hover {
+          background: #d93636;
+        }
+      }
+    }
+  }
+}
+

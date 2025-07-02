@@ -181,3 +181,50 @@
     }
   }
 }
+
+
+.app.dark .orders {
+  color: #f1f1f1;
+  background-color: #1a1a1a; // sayfanın zeminini koyulaştırır
+
+  .container {
+    .title {
+      button {
+        background-color: #1dbf73;
+        color: white;
+
+        &:hover {
+          background-color: #159c5c;
+        }
+      }
+    }
+
+    table {
+      background-color: #2a2a2a;
+      box-shadow: 0 0 5px rgba(255, 255, 255, 0.05);
+
+      tr {
+        th {
+          background-color: #3a3a3a;
+          color: #f1f1f1;
+        }
+
+        td {
+          color: #e0e0e0;
+
+          .gigLink {
+            color: inherit;
+
+            &:hover {
+              color: #1dbf73;
+            }
+          }
+        }
+
+        &:nth-child(even) {
+          background-color: rgba(29, 191, 115, 0.1);
+        }
+      }
+    }
+  }
+}

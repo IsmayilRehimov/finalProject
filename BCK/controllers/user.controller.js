@@ -57,3 +57,21 @@ export const updateUser = async (req, res, next) => {
   }
 };
 
+export const updateDarkMode = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id);
+
+    if (!user) return next(createError(404, "User not found"));
+
+    if (req.userId !== user._id.toString()) {
+      return next(createError(403, "You can update only your account!"));
+    }
+
+    user.darkMode = req.body.darkMode;
+    await user.save();
+
+    res.status(200).json({ darkMode: user.darkMode });
+  } catch (err) {
+    next(err);
+  }
+};

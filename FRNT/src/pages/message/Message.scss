@@ -125,3 +125,69 @@
     }
   }
 }
+
+.app.dark .message {
+  background-color: #1a1a1a;
+  color: #f1f1f1;
+
+  .container {
+    .breadcrumbs {
+      color: #aaa;
+    }
+
+    .messages {
+      background-color: #2a2a2a;
+
+      .item {
+        .profileSection {
+          .deleteBtn {
+            color: crimson;
+
+            &:hover {
+              color: darkred;
+            }
+          }
+        }
+
+        .messageContent {
+          p {
+            background-color: #3a3a3a;
+            color: #ddd;
+          }
+        }
+
+        &.owner {
+          .messageContent p {
+            background-color: royalblue;
+            color: #f1f1f1;
+          }
+        }
+      }
+    }
+
+    hr {
+      border-color: #444;
+    }
+
+    .write {
+      textarea {
+        background-color: #2a2a2a;
+        color: #f1f1f1;
+        border: 1px solid #444;
+
+        &::placeholder {
+          color: #888;
+        }
+      }
+
+      button {
+        background-color: #1dbf73;
+        color: white;
+
+        &:hover {
+          background-color: #19a463;
+        }
+      }
+    }
+  }
+}

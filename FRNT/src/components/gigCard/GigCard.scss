@@ -39,6 +39,7 @@
       span {
         font-size: 14px;
         font-weight: 500;
+        color: #111;
       }
     }
 
@@ -204,6 +205,49 @@
 
       .price h2 {
         font-size: 15px;
+      }
+    }
+  }
+}
+
+/* DARK MODE */
+
+.app.dark .gigCard {
+  background-color: #2a2a2a;
+  border: 1px solid #444;
+
+  img {
+    // optional: darker overlay if needed
+  }
+
+  .info {
+    .user span {
+      color: #f1f1f1;
+    }
+
+    p.desc {
+      color: #ddd;
+    }
+
+    .star {
+      .count {
+        color: #aaa;
+      }
+    }
+  }
+
+  hr {
+    border-color: #444;
+  }
+
+  .detail {
+    .price {
+      span {
+        color: #aaa;
+      }
+
+      h2 {
+        color: #f1f1f1;
       }
     }
   }

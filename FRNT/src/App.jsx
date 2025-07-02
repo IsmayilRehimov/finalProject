@@ -1,6 +1,6 @@
 import "./app.scss";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
 import Home from "./pages/home/Home";
@@ -21,15 +21,63 @@ import Favorites from "./pages/favorites/Favorites";
 import { FavoritesProvider } from "./context/FavoritesContext";
 import UserProfile from "./pages/userProfile/UserProfile";
 import Profile from "./pages/profile/Profile";
+import newRequest from "./utils/newRequest";
 
 function App() {
   const queryClient = new QueryClient();
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    const userId = localStorage.getItem("userId");
+    if (userId) {
+      fetch(`/api/users/${userId}`)
+        .then((res) => res.json())
+        .then((user) => {
+          if (user.darkMode !== undefined) {
+            setDarkMode(user.darkMode);
+          }
+        })
+        .catch((err) => console.log(err));
+    } else {
+      const savedMode = localStorage.getItem("darkMode");
+      if (savedMode === "true") setDarkMode(true);
+    }
+  }, []);
+
+  const toggleMode = async () => {
+  const newMode = !darkMode;
+  setDarkMode(newMode);
+  localStorage.setItem("darkMode", newMode);
+
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  if (currentUser) {
+    try {
+      await newRequest.put(`/users/${currentUser._id}/theme`, { darkMode: newMode });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+};
+
+useEffect(() => {
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  if (currentUser) {
+    newRequest.get(`/users/${currentUser._id}`).then((res) => {
+      setDarkMode(res.data.darkMode);
+      localStorage.setItem("darkMode", res.data.darkMode);
+    }).catch((err) => console.log(err));
+  } else {
+    const savedMode = localStorage.getItem("darkMode");
+    if (savedMode === "true") setDarkMode(true);
+  }
+}, []);
+
 
   const Layout = () => (
-    <div className="app">
+    <div className={darkMode ? "app dark" : "app"}>
       <QueryClientProvider client={queryClient}>
         <FavoritesProvider>
-          <Navbar />
+          <Navbar toggleMode={toggleMode} darkMode={darkMode} />
           <Outlet />
           <Footer />
         </FavoritesProvider>
@@ -56,8 +104,7 @@ function App() {
         { path: "/pay/:id", element: <Pay /> },
         { path: "/success", element: <Success /> },
         { path: "/favorites", element: <Favorites /> },
-        { path:"/user/:id", element:<UserProfile />},
-
+        { path: "/user/:id", element: <UserProfile /> },
         { path: "*", element: <NotFound /> },
       ],
     },

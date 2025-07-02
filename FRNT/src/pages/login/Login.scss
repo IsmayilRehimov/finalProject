@@ -103,3 +103,43 @@
     }
   }
 }
+
+
+.app.dark .login {
+  background-color: #1a1a1a;
+  color: #f1f1f1;
+
+  form {
+    h1 {
+      color: #f1f1f1;
+    }
+
+    label {
+      color: #ccc;
+    }
+
+    input,
+    textarea {
+      background-color: #2a2a2a;
+      color: #f1f1f1;
+      border: 1px solid #444;
+
+      &::placeholder {
+        color: #888;
+      }
+    }
+
+    button {
+      background-color: #1dbf73;
+      color: white;
+
+      &:hover {
+        background-color: #19a862;
+      }
+    }
+
+    span {
+      color: #ff6b6b;
+    }
+  }
+}

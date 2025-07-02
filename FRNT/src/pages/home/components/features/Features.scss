@@ -148,3 +148,28 @@
     }
   }
 }
+
+
+.app.dark .features {
+  background-color: #1a1a1a;
+
+  .container {
+    .item {
+      h1 {
+        color: #f1f1f1;
+      }
+
+      .title {
+        color: #ccc;
+
+        img {
+          filter: brightness(0) invert(1);
+        }
+      }
+
+      p {
+        color: #aaa;
+      }
+    }
+  }
+}

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import newRequest from "../../utils/newRequest";
+import { FiHeart, FiMessageCircle } from "react-icons/fi";
 import "./Navbar.scss";
 
-function Navbar() {
+function Navbar({ toggleMode, darkMode }) {
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
@@ -35,16 +36,15 @@ function Navbar() {
     };
 
     fetchUnreadCount();
-
-    const interval = setInterval(fetchUnreadCount, 10000); // 10 saniyede bir güncelle
+    const interval = setInterval(fetchUnreadCount, 10000);
     return () => clearInterval(interval);
   }, [currentUser]);
 
   const handleLogout = async () => {
     try {
       await newRequest.post("/auth/logout");
-      localStorage.setItem("currentUser", null);
-      navigate("/");
+      localStorage.removeItem("currentUser");
+      window.location.reload();
     } catch (err) {
       console.log(err);
     }
@@ -78,39 +78,57 @@ function Navbar() {
         </div>
 
         <div className="links">
-          <Link to="/favorites">Favorites</Link>
+          <Link to="/favorites">
+            <FiHeart size={20} style={{ color: "red" }} />
+          </Link>
+
           <div className="messagesLink">
             <Link className="link" to="/messages">
-              Messages
+              <FiMessageCircle size={20} />
             </Link>
             {unreadCount > 0 && (
               <span className="unreadBadge">{unreadCount}</span>
             )}
           </div>
 
-          {!currentUser?.isSeller && <span>Become a Seller</span>}
+          <button className="darkModeBtn" onClick={toggleMode}>
+            {darkMode ? "☀️ Light" : "🌙 Dark"}
+          </button>
+
+          
           {currentUser ? (
             <div className="user" onClick={() => setOpen(!open)}>
               <img src={currentUser.img || "/img/noavatar.jpg"} alt="" />
               <span>{currentUser?.username}</span>
               {open && (
                 <div className="options">
-                  <Link className="link" to="/profile">Profile</Link>
+                  <Link className="link" to="/profile">
+                    Profile
+                  </Link>
                   {currentUser.isSeller && (
                     <>
-                      <Link className="link" to="/mygigs">Gigs</Link>
-                      <Link className="link" to="/add">Add New Gig</Link>
+                      <Link className="link" to="/mygigs">
+                        Gigs
+                      </Link>
+                      <Link className="link" to="/add">
+                        Add New Gig
+                      </Link>
                     </>
                   )}
-                  <Link className="link" to="/orders">Orders</Link>
-                  <Link className="link" to="/messages">Messages</Link>
-                  <Link className="link" onClick={handleLogout}>Logout</Link>
+                  <Link className="link" to="/orders">
+                    Orders
+                  </Link>
+                  <Link className="link" onClick={handleLogout}>
+                    Logout
+                  </Link>
                 </div>
               )}
             </div>
           ) : (
             <>
-              <Link to="/login" className="link">Sign in</Link>
+              <Link to="/login" className="link">
+                Sign in
+              </Link>
               <Link className="link" to="/register">
                 <button>Join</button>
               </Link>
@@ -123,14 +141,30 @@ function Navbar() {
         <>
           <hr />
           <div className="menu">
-            <Link className="link menuLink" to="/gigs?cat=design">Graphics & Design</Link>
-            <Link className="link menuLink" to="/gigs?cat=animation">Video & Animation</Link>
-            <Link className="link menuLink" to="/gigs?cat=music">Music & Audio</Link>
-            <Link className="link menuLink" to="/gigs?cat=web">Programming & Development</Link>
-            <Link className="link menuLink" to="/gigs?cat=digital">Digital Marketing</Link>
-            <Link className="link menuLink" to="/gigs?cat=business">Business</Link>
-            <Link className="link menuLink" to="/gigs?cat=lifestyle">Lifestyle</Link>
-            <Link className="link menuLink" to="/gigs?cat=writing">Writing & Translate</Link>
+            <Link className="link menuLink" to="/gigs?cat=design">
+              Graphics & Design
+            </Link>
+            <Link className="link menuLink" to="/gigs?cat=animation">
+              Video & Animation
+            </Link>
+            <Link className="link menuLink" to="/gigs?cat=music">
+              Music & Audio
+            </Link>
+            <Link className="link menuLink" to="/gigs?cat=web">
+              Programming & Development
+            </Link>
+            <Link className="link menuLink" to="/gigs?cat=digital">
+              Digital Marketing
+            </Link>
+            <Link className="link menuLink" to="/gigs?cat=business">
+              Business
+            </Link>
+            <Link className="link menuLink" to="/gigs?cat=lifestyle">
+              Lifestyle
+            </Link>
+            <Link className="link menuLink" to="/gigs?cat=writing">
+              Writing & Translate
+            </Link>
           </div>
           <hr />
         </>

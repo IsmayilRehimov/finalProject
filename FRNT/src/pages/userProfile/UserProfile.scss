@@ -134,3 +134,47 @@
     }
   }
 }
+
+
+.app.dark {
+  .userProfile {
+    background-color: #1a1a1a;  // koyu arka plan
+    color: #f1f1f1;
+
+    .container {
+      .userInfo {
+        .details {
+          .additionalInfo {
+            color: #bbb;
+
+            span {
+              b {
+                color: #eee;  // başlıklar açık renk
+              }
+            }
+
+            .averageRating {
+              color: #eee;
+            }
+          }
+        }
+      }
+
+      .userGigs {
+        h2 {
+          color: #f1f1f1;
+        }
+
+        .gigsList {
+          /* İçerik kutuların arka planı varsa onları da koyulaştır */
+          > * {
+            background-color: #2a2a2a;
+            border-radius: 8px;
+            padding: 10px;
+            color: #ddd;
+          }
+        }
+      }
+    }
+  }
+}

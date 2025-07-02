@@ -1,11 +1,16 @@
 .add {
   display: flex;
   justify-content: center;
+   padding: 50px 0;
 
   .container {
     width: 100%;
     max-width: 1200px;
     padding: 40px 20px;
+    background-color: #fff;     // varsayılan açık mod
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
 
     h1 {
       margin-bottom: 30px;
@@ -38,6 +43,8 @@
           font-size: 14px;
           border: 1px solid #ccc;
           border-radius: 5px;
+          background-color: #fff;
+          color: #333;
         }
 
         .images {
@@ -114,6 +121,35 @@
       margin-top: 30px;
       max-width: 200px;
       align-self: center;
+    }
+  }
+
+  /* dark mode */
+  .app.dark & {
+    .container {
+      background-color: #1e1e1e;
+      border-color: #444;
+
+      h1 {
+        color: #f1f1f1;
+      }
+
+      .sections {
+        label {
+          color: #ddd;
+        }
+
+        .info,
+        .details {
+          input,
+          select,
+          textarea {
+            background-color: #121212;
+            color: #f1f1f1;
+            border-color: #555;
+          }
+        }
+      }
     }
   }
 

@@ -45,3 +45,19 @@
     }
   }
 }
+
+
+.app.dark .pay {
+  background-color: #1a1a1a; // sayfa zeminini koyu yapar
+  color: #f1f1f1;
+
+  .container {
+    background-color: #2a2a2a;
+    border-color: #444;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
+
+    h2 {
+      color: #f1f1f1;
+    }
+  }
+}

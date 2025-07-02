@@ -70,3 +70,41 @@
     }
   }
 }
+
+
+.app.dark .reviews {
+  color: #f1f1f1;
+
+  .add {
+    .addForm {
+      input {
+        background-color: #2a2a2a;
+        color: #f1f1f1;
+        border: 1px solid #444;
+
+        &::placeholder {
+          color: #aaa;
+        }
+      }
+
+      select {
+        background-color: #2a2a2a;
+        color: #f1f1f1;
+        border: 1px solid #444;
+      }
+
+      button {
+        background-color: #1dbf73;
+        color: #fff;
+
+        &:hover {
+          background-color: #19a463;
+        }
+      }
+    }
+  }
+
+  hr {
+    border-color: #333;
+  }
+}
