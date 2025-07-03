@@ -59,7 +59,7 @@ function Gig() {
         <div className="container">
           <div className="left">
             <span className="breadcrumbs">
-              FreeWell {">"} Graphics & Design {">"}
+              FreeWell {">"} {data.cat} {">"} {data.features[0]}
             </span>
             <h1>{data.title}</h1>
 

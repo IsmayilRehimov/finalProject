@@ -15,7 +15,6 @@ import Message from "./pages/message/Message";
 import MyGigs from "./pages/myGigs/MyGigs";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Pay from "./pages/pay/Pay";
-import Success from "./pages/success/Success";
 import NotFound from "./pages/notFound/NotFound";
 import Favorites from "./pages/favorites/Favorites";
 import { FavoritesProvider } from "./context/FavoritesContext";
@@ -23,6 +22,8 @@ import UserProfile from "./pages/userProfile/UserProfile";
 import Profile from "./pages/profile/Profile";
 import newRequest from "./utils/newRequest";
 import AdminPanel from "./pages/adminPanel/AdminPanel";
+import Success from "./pages/success/Success";
+
 
 function App() {
   const queryClient = new QueryClient();

@@ -99,7 +99,7 @@ const Profile = () => {
   return (
     <div className="profileContainer">
       <div className="profileSidebar">
-        <img src={currentUser.img || "/default-avatar.png"} alt="Profile" />
+        <img src={currentUser.img || "/img/noavatar.jpg"} alt="Profile" />
         <h3>{currentUser.username}</h3>
         <p>{currentUser.email}</p>
         {currentUser.isSeller && <p>{currentUser.desc}</p>}

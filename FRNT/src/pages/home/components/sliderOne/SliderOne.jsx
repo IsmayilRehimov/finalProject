@@ -1,30 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./SliderOne.scss";
 import Slide from "../../../../components/slide/Slide";
 import GigCard from "../../../../components/gigCard/GigCard";
 
 const SliderOne = ({ gigs, isLoading, error }) => {
-  const [slidesToShow, setSlidesToShow] = useState(4);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth <= 480) {
-        setSlidesToShow(1);
-      } else if (window.innerWidth <= 768) {
-        setSlidesToShow(2);
-      } else if (window.innerWidth <= 992) {
-        setSlidesToShow(3);
-      } else {
-        setSlidesToShow(4);
-      }
-    };
-
-    handleResize(); 
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   const topRatedGigs = gigs
     ?.map((gig) => ({
       ...gig,
@@ -51,9 +30,11 @@ const SliderOne = ({ gigs, isLoading, error }) => {
         ) : topRatedGigs?.length === 0 ? (
           <p>No top rated gigs found.</p>
         ) : (
-          <Slide slidesToShow={slidesToShow} arrowsScroll={slidesToShow}>
+          <Slide slidesToShow={5}>
             {topRatedGigs.map((gig) => (
-              <GigCard key={gig._id} item={gig} />
+              <div key={gig._id}>
+                <GigCard item={gig} />
+              </div>
             ))}
           </Slide>
         )}

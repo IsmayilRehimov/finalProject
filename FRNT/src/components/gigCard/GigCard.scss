@@ -1,33 +1,42 @@
 .gigCard {
-  flex: 1 1 220px;
-  max-width: 324px;
-  min-width: 200px;
-  height: auto;
-  border: 1px solid rgb(228, 228, 228);
-  margin-bottom: 40px;
-  border-radius: 8px;
+  flex: none;
+  width: 250px; /* Sabit en */
+  max-width: 250px;
+  min-width: 250px;
+  background: linear-gradient(135deg, #f0fff9, #e3fff2, #d0ffe7);
+  border: 1px solid #ddd;
+  border-radius: 12px;
   overflow: hidden;
-  background-color: #fff;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-  img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   }
 
-  .info {
-    padding: 10px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    flex-grow: 1;
+  .cardTop {
+    position: relative;
+    text-decoration: none;
 
-    .user {
+    .cover {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .userInfo {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 4px 8px;
+      border-radius: 20px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
 
       img {
         width: 26px;
@@ -38,13 +47,21 @@
 
       span {
         font-size: 14px;
-        font-weight: 500;
         color: #111;
+        font-weight: 500;
       }
     }
+  }
 
-    p.desc {
-      color: #111;
+  .cardContent {
+    padding: 12px 16px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .desc {
+      color: #333;
       font-size: 14px;
       line-height: 1.4;
       height: 42px;
@@ -59,196 +76,256 @@
       display: flex;
       align-items: center;
       gap: 5px;
-      min-height: 20px;
 
       img {
-        height: 14px;
         width: 14px;
+        height: 14px;
       }
 
       span {
         font-size: 14px;
         font-weight: bold;
-        color: #ffc108;
+        color: #ff9800;
       }
 
       .count {
-        color: #555;
+        color: #777;
         font-size: 12px;
-        font-weight: 400;
       }
     }
   }
 
-  hr {
-    height: 0;
-    border: 0.5px solid rgb(228, 228, 228);
-  }
+  .cardBottom {
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #e6f9f2, #f9fffc);
 
-  .detail {
-    padding: 10px 20px;
+  border-top: 1px solid #ddd;
+
+  .likeIcon {
+    cursor: pointer;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    transition: transform 0.2s ease;
 
-    .likeIcon {
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-      object-fit: cover;
-      transition: transform 0.2s ease;
+    svg {
+      color: #555;
+      transition: color 0.2s ease;
     }
 
-    .likeIcon:hover {
+    &.liked svg {
+      color: #ff4d4d;
+    }
+
+    &:hover {
       transform: scale(1.2);
-    }
-
-    .price {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-
-      span {
-        color: #999;
-        font-size: 12px;
-      }
-
-      h2 {
-        color: #555;
-        font-size: 18px;
-        font-weight: 400;
-        text-align: end;
-      }
-
-      sup {
-        font-size: 12px;
-        font-weight: 300;
-      }
     }
   }
 
-  // Tablet üçün
-  @media (max-width: 1024px) {
-    max-width: 280px;
+  .price {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 
-    img {
-      height: 160px;
+    span {
+      font-size: 12px;
+      color: #999;
     }
 
-    .info {
-      gap: 16px;
+    h2 {
+      font-size: 18px;
+      color: #222;
+      font-weight: 600;
+    }
+  }
+}
 
-      .user img {
-        width: 24px;
-        height: 24px;
+}
+
+// Tablet üçün
+@media (max-width: 1024px) {
+  .gigCard {
+    max-width: 280px;
+
+    .cardTop {
+      .cover {
+        height: 160px;
       }
 
-      p.desc {
+      .userInfo {
+        padding: 3px 6px;
+
+        img {
+          width: 24px;
+          height: 24px;
+        }
+
+        span {
+          font-size: 13px;
+        }
+      }
+    }
+
+    .cardContent {
+      padding: 10px 14px;
+      gap: 8px;
+
+      .desc {
         font-size: 13px;
         height: 38px;
       }
 
-      .star span {
-        font-size: 13px;
+      .star {
+        img {
+          width: 13px;
+          height: 13px;
+        }
+
+        span {
+          font-size: 13px;
+        }
+
+        .count {
+          font-size: 11px;
+        }
       }
     }
 
-    .detail {
-      padding: 10px 16px;
+    .cardBottom {
+      padding: 10px 14px;
 
-      .likeIcon {
-        width: 18px;
-        height: 18px;
+      .likeIcon svg {
+        width: 20px;
+        height: 20px;
       }
 
-      .price h2 {
-        font-size: 16px;
-      }
-    }
-  }
+      .price {
+        h2 {
+          font-size: 16px;
+        }
 
-  // Mobil üçün
-  @media (max-width: 480px) {
-    min-width: 100%;
-    max-width: 100%;
-
-    img {
-      height: 140px;
-    }
-
-    .info {
-      padding: 10px 16px;
-      gap: 14px;
-
-      .user img {
-        width: 22px;
-        height: 22px;
-      }
-
-      p.desc {
-        font-size: 12px;
-        height: 36px;
-      }
-
-      .star span {
-        font-size: 12px;
-      }
-    }
-
-    .detail {
-      padding: 10px 16px;
-
-      .likeIcon {
-        width: 16px;
-        height: 16px;
-      }
-
-      .price h2 {
-        font-size: 15px;
+        span {
+          font-size: 11px;
+        }
       }
     }
   }
 }
 
+// Mobil üçün
+@media (max-width: 480px) {
+  .gigCard {
+    min-width: 100%;
+    max-width: 100%;
+
+    .cardTop {
+      .cover {
+        height: 140px;
+      }
+
+      .userInfo {
+        padding: 2px 5px;
+
+        img {
+          width: 22px;
+          height: 22px;
+        }
+
+        span {
+          font-size: 12px;
+        }
+      }
+    }
+
+    .cardContent {
+      padding: 10px 12px;
+      gap: 6px;
+
+      .desc {
+        font-size: 12px;
+        height: 36px;
+      }
+
+      .star {
+        img {
+          width: 12px;
+          height: 12px;
+        }
+
+        span {
+          font-size: 12px;
+        }
+
+        .count {
+          font-size: 10px;
+        }
+      }
+    }
+
+    .cardBottom {
+      padding: 10px 12px;
+
+      .likeIcon svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      .price {
+        h2 {
+          font-size: 15px;
+        }
+
+        span {
+          font-size: 10px;
+        }
+      }
+    }
+  }
+}
+
+
 /* DARK MODE */
-
 .app.dark .gigCard {
-  background-color: #2a2a2a;
+  background: linear-gradient(135deg, #2b2b2b, #1f1f1f);
   border: 1px solid #444;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 
-  img {
-    // optional: darker overlay if needed
+  .cardTop .userInfo {
+    background: rgba(50, 50, 50, 0.9);
+
+    span {
+      color: #f1f1f1;
+    }
   }
 
-  .info {
-    .user span {
+  .cardContent .desc {
+    color: #ccc;
+  }
+
+  .cardContent .star .count {
+    color: #aaa;
+  }
+
+  .cardBottom {
+    background: #2a2a2a;
+
+    .price h2 {
       color: #f1f1f1;
     }
 
-    p.desc {
-      color: #ddd;
+    .price span {
+      color: #aaa;
     }
 
-    .star {
-      .count {
-        color: #aaa;
-      }
+    .likeIcon svg {
+      color: #aaa;
     }
-  }
 
-  hr {
-    border-color: #444;
-  }
-
-  .detail {
-    .price {
-      span {
-        color: #aaa;
-      }
-
-      h2 {
-        color: #f1f1f1;
-      }
+    .likeIcon.liked svg {
+      color: #ff4d4d;
     }
   }
 }

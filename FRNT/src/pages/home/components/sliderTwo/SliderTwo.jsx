@@ -4,7 +4,7 @@ import Slide from "../../../../components/slide/Slide";
 import GigCard from "../../../../components/gigCard/GigCard";
 
 const SliderTwo = ({ gigs, isLoading, error }) => {
-  const [slidesToShow, setSlidesToShow] = useState(4);
+  const [slidesToShow, setSlidesToShow] = useState(5);
 
   useEffect(() => {
     const handleResize = () => {
@@ -15,7 +15,7 @@ const SliderTwo = ({ gigs, isLoading, error }) => {
       } else if (window.innerWidth <= 992) {
         setSlidesToShow(3);
       } else {
-        setSlidesToShow(4);
+        setSlidesToShow(5);
       }
     };
 

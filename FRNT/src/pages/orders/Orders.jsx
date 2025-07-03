@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Orders.scss";
 import { useQuery } from "@tanstack/react-query";
 import newRequest from "../../utils/newRequest";
+import { FiMessageCircle } from "react-icons/fi";
 
 const Orders = () => {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -67,11 +68,11 @@ const Orders = () => {
                   </td>
                   <td>{order.price}</td>
                   <td>
-                    <img
-                      className="message"
-                      src="./img/message.png"
-                      alt=""
+                    <FiMessageCircle
+                      size={20}
+                      className="messageIcon"
                       onClick={() => handleContact(order)}
+                      style={{ cursor: "pointer" }}
                     />
                   </td>
                 </tr>

@@ -33,6 +33,15 @@
       }
     }
 
+    .messageIcon {
+      color: #555;
+      transition: 0.3s;
+
+      &:hover {
+        color: #000;
+      }
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -84,20 +93,18 @@
       }
     }
     .gigLink {
-  color: inherit;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
+      color: inherit;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
 
-  &:hover {
-    color: #1dbf73;
-    text-decoration: underline;
+      &:hover {
+        color: #1dbf73;
+        text-decoration: underline;
+      }
+    }
   }
-}
 
-  }
-
-  
   @media (max-width: 768px) {
     .container {
       padding: 30px 0;
@@ -136,7 +143,6 @@
     }
   }
 
-  
   @media (max-width: 480px) {
     padding: 10px;
 
@@ -182,7 +188,6 @@
   }
 }
 
-
 .app.dark .orders {
   color: #f1f1f1;
   background-color: #1a1a1a; // sayfanın zeminini koyulaştırır
@@ -196,6 +201,15 @@
         &:hover {
           background-color: #159c5c;
         }
+      }
+    }
+
+    .messageIcon {
+      color: white;
+      transition: 0.3s;
+
+      &:hover {
+        color: #1dbf73;
       }
     }
 
