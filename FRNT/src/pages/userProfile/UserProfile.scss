@@ -1,179 +1,299 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 .userProfile {
-  display: flex;
-  justify-content: center;
-  padding: 50px 0;
+  width: 100%;
+  min-height: 100vh;
+  padding: 2rem 0;
+  font-family: 'Inter', sans-serif;
 
   .container {
-    width: 1400px;
-    max-width: 95%;
-    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 2rem;
 
     .userInfo {
       display: flex;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 1.5rem;
 
-      .profilePic {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        object-fit: cover;
-      }
-
-      .details {
+      .profileHeader {
         display: flex;
-        flex-direction: column;
-        gap: 10px;
-        flex: 1;
+        align-items: center;
+        gap: 1.5rem;
 
-        h2 {
-          font-size: 24px;
+        .profilePic {
+          width: 120px;
+          height: 120px;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 3px solid #e2e8f0;
         }
 
-        .additionalInfo {
+        .profileDetails {
+          flex: 1;
+
+          h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin: 0 0 0.5rem 0;
+          }
+
+          .userDescription {
+            color: #64748b;
+            line-height: 1.5;
+            margin: 0;
+          }
+        }
+      }
+
+      .userStats {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+
+        .statItem {
           display: flex;
           align-items: center;
-          flex-wrap: wrap;
-          gap: 20px;
-          font-size: 14px;
-          color: #555;
+          gap: 0.75rem;
+          padding: 1rem;
+          background-color: #f8fafc;
+          border-radius: 0.5rem;
 
-          span {
+          .statIcon {
+            font-size: 1.25rem;
+            color: #64748b;
+          }
+
+          .ratingStars {
             display: flex;
-            align-items: center;
-            
-            b {
-              color: black;
-              margin-right: 5px;
+            gap: 0.125rem;
+
+            .star {
+              font-size: 1rem;
+              color: #e2e8f0;
+
+              &.filled {
+                color: #ffc108;
+              }
             }
           }
 
-          .averageRating {
-            display: flex;
-            align-items: center;
-            gap: 5px;
+          .statLabel {
+            display: block;
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-bottom: 0.125rem;
+          }
+
+          .statValue {
+            display: block;
+            font-size: 0.9375rem;
             font-weight: 500;
+            color: #1e293b;
           }
         }
       }
+    }
+
+    .divider {
+      height: 1px;
+      background-color: #e2e8f0;
+      margin: 0.5rem 0;
     }
 
     .userGigs {
-      h2 {
-        margin-bottom: 20px;
+      .sectionTitle {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 1.5rem;
+
+        .titleIcon {
+          font-size: 1.25rem;
+          color: #64748b;
+        }
       }
 
-      .gigsList {
+      .gigsGrid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-        gap: 20px;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
       }
+    }
+
+    .loadingState, .errorState, .emptyState {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      color: #64748b;
+
+      .spinner {
+        width: 2rem;
+        height: 2rem;
+        border: 3px solid rgba(29, 191, 115, 0.2);
+        border-radius: 50%;
+        border-top-color: #1dbf73;
+        animation: spin 1s linear infinite;
+        margin-bottom: 1rem;
+      }
+    }
+
+    .errorState {
+      color: #ef4444;
     }
   }
 }
 
-/* Tablet üçün */
-@media (max-width: 992px) {
-  .userProfile {
-    padding: 30px 0;
-
-    .container {
-      .userInfo {
-        flex-direction: column;
-        align-items: flex-start;
-
-        .profilePic {
-          width: 80px;
-          height: 80px;
-        }
-
-        .details {
-          h2 {
-            font-size: 20px;
-          }
-        }
-      }
-    }
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 
-/* Mobil üçün */
-@media (max-width: 576px) {
+// Tablet styles (768px - 1024px)
+@media (max-width: 1024px) {
   .userProfile {
-    padding: 20px 0;
+    padding: 1.5rem 0;
 
     .container {
       .userInfo {
-        .profilePic {
-          width: 70px;
-          height: 70px;
+        .profileHeader {
+          .profilePic {
+            width: 100px;
+            height: 100px;
+          }
         }
 
-        .details {
-          h2 {
-            font-size: 18px;
-          }
-
-          .additionalInfo {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 10px;
-          }
+        .userStats {
+          grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
         }
       }
 
       .userGigs {
-        h2 {
-          font-size: 18px;
+        .gigsGrid {
+          grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
         }
       }
     }
   }
 }
 
-
-.app.dark {
+// Mobile styles (up to 767px)
+@media (max-width: 767px) {
   .userProfile {
-    background-color: #1a1a1a;  // koyu arka plan
-    color: #f1f1f1;
+    padding: 1rem 0;
 
     .container {
-      .userInfo {
-        .details {
-          .additionalInfo {
-            color: #bbb;
+      padding: 0 1rem;
+      gap: 1.5rem;
 
-            span {
-              b {
-                color: #eee;  // başlıklar açık renk
+      .userInfo {
+        .profileHeader {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 1rem;
+
+          .profilePic {
+            width: 80px;
+            height: 80px;
+          }
+        }
+
+        .userStats {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .userGigs {
+        .sectionTitle {
+          font-size: 1.25rem;
+        }
+
+        .gigsGrid {
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+          gap: 1rem;
+        }
+      }
+    }
+  }
+}
+
+// Dark mode styles
+.app.dark .userProfile {
+  background-color: #0f172a;
+
+  .container {
+    .userInfo {
+      .profileHeader {
+        .profileDetails {
+          h2 {
+            color: #f8fafc;
+          }
+
+          .userDescription {
+            color: #94a3b8;
+          }
+        }
+      }
+
+      .userStats {
+        .statItem {
+          background-color: #1e293b;
+
+          .statIcon {
+            color: #94a3b8;
+          }
+
+          .ratingStars {
+            .star {
+              color: #475569;
+
+              &.filled {
+                color: #ffc108;
               }
             }
+          }
 
-            .averageRating {
-              color: #eee;
-            }
+          .statLabel {
+            color: #94a3b8;
+          }
+
+          .statValue {
+            color: #e2e8f0;
           }
         }
       }
+    }
 
-      .userGigs {
-        h2 {
-          color: #f1f1f1;
-        }
+    .divider {
+      background-color: #334155;
+    }
 
-        .gigsList {
-          /* İçerik kutuların arka planı varsa onları da koyulaştır */
-          > * {
-            background-color: #2a2a2a;
-            border-radius: 8px;
-            padding: 10px;
-            color: #ddd;
-          }
+    .userGigs {
+      .sectionTitle {
+        color: #f8fafc;
+
+        .titleIcon {
+          color: #94a3b8;
         }
+      }
+    }
+
+    .loadingState, .emptyState {
+      color: #94a3b8;
+
+      .spinner {
+        border-top-color: #1dbf73;
       }
     }
   }

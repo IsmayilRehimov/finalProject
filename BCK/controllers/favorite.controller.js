@@ -1,6 +1,5 @@
 import Favorite from "../models/favorite.model.js";
 
-// ADD to favorites
 export const addFavorite = async (req, res) => {
   try {
     const existing = await Favorite.findOne({
@@ -22,7 +21,6 @@ export const addFavorite = async (req, res) => {
   }
 };
 
-// REMOVE from favorites
 export const removeFavorite = async (req, res) => {
   try {
     await Favorite.findOneAndDelete({
@@ -35,7 +33,6 @@ export const removeFavorite = async (req, res) => {
   }
 };
 
-// GET all favorites for a user
 export const getFavorites = async (req, res) => {
   try {
     const favorites = await Favorite.find({ userId: req.userId });

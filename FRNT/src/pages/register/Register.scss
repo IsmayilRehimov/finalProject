@@ -1,174 +1,281 @@
 .register {
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 40px 20px; 
+  min-height: 100vh;
+  padding: 40px 20px;
+  background-color: #f8f9fa;
 
-  form {
-    width: 960px;
-    padding: 100px 0px;
-    display: flex;
-    gap: 120px;
-    flex-wrap: wrap;
+  .container {
+    width: 100%;
+    max-width: 1000px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 40px;
 
-    h1 {
-      color: gray;
-      margin-bottom: 20px;
-      font-size: 32px;
-    }
-
-    .left,
-    .right {
-      flex: 1;
-      min-width: 300px;
+    form {
       display: flex;
-      flex-direction: column;
-      gap: 10px;
-      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
 
-      label {
-        color: gray;
-        font-size: 18px;
+      h1 {
+        color: #333;
+        margin-bottom: 30px;
+        font-size: 28px;
+        font-weight: 600;
       }
 
-      input,
-      textarea {
-        padding: 20px;
-        border: 1px solid rgb(216, 214, 214);
-        font-size: 16px;
+      .left, .right {
+        flex: 1;
+        min-width: 300px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        label {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-weight: 500;
+          color: #555;
+          font-size: 15px;
+        }
+
+        input, textarea {
+          padding: 12px 15px;
+          border: 1px solid #ddd;
+          border-radius: 6px;
+          font-size: 15px;
+          transition: border-color 0.2s;
+
+          &:focus {
+            outline: none;
+            border-color: #1dbf73;
+          }
+
+          &.error {
+            border-color: #ff6b6b;
+          }
+        }
+
+        textarea {
+          min-height: 120px;
+          resize: vertical;
+        }
+
+        .error-message {
+          color: #ff6b6b;
+          font-size: 13px;
+          margin-top: 4px;
+        }
+
+        .file-input {
+          position: relative;
+
+          input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+          }
+
+          .file-label {
+            display: block;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            transition: all 0.2s;
+
+            &:hover {
+              background-color: #f0f0f0;
+            }
+          }
+        }
       }
 
       button {
-        border: none;
-        padding: 20px;
-        color: white;
-        font-weight: 500;
-        font-size: 18px;
         background-color: #1dbf73;
+        color: white;
+        border: none;
+        padding: 14px;
+        border-radius: 6px;
+        font-weight: 500;
+        font-size: 16px;
         cursor: pointer;
+        transition: background-color 0.2s;
+        margin-top: 10px;
+
+        &:hover {
+          background-color: #19a463;
+        }
+
+        &:disabled {
+          background-color: #ccc;
+          cursor: not-allowed;
+        }
       }
 
-      .toggle {
-        display: flex;
-        align-items: center;
-        gap: 10px;
+      .toggle-group {
+        margin-bottom: 20px;
+
+        .toggle-label {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          cursor: pointer;
+
+          span {
+            font-weight: 500;
+            color: #555;
+          }
+        }
 
         .switch {
           position: relative;
           display: inline-block;
           width: 50px;
           height: 24px;
-        }
 
-        .switch input {
-          opacity: 0;
-          width: 0;
-          height: 0;
-        }
+          input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+          }
 
-        .slider {
-          position: absolute;
-          cursor: pointer;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background-color: #ccc;
-          transition: 0.4s;
-          border-radius: 24px;
-        }
+          .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 24px;
 
-        .slider:before {
-          position: absolute;
-          content: "";
-          height: 16px;
-          width: 16px;
-          left: 4px;
-          bottom: 4px;
-          background-color: white;
-          transition: 0.4s;
-          border-radius: 50%;
-        }
+            &:before {
+              position: absolute;
+              content: "";
+              height: 16px;
+              width: 16px;
+              left: 4px;
+              bottom: 4px;
+              background-color: white;
+              transition: 0.4s;
+              border-radius: 50%;
+            }
+          }
 
-        input:checked + .slider {
-          background-color: #2196f3;
-        }
+          input:checked + .slider {
+            background-color: #1dbf73;
+          }
 
-        input:focus + .slider {
-          box-shadow: 0 0 1px #2196f3;
-        }
-
-        input:checked + .slider:before {
-          transform: translateX(26px);
+          input:checked + .slider:before {
+            transform: translateX(26px);
+          }
         }
       }
     }
   }
+}
 
+// Dark mode styles
+.app.dark {
+  .register {
+    background-color: #121212;
 
-  @media (min-width: 768px) and (max-width: 1024px) {
-    form {
-      flex-direction: column;
-      width: 90%;
-      gap: 60px;
-      padding: 80px 0px;
+    .container {
+      background-color: #2a2a2a;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 
-      h1 {
-        font-size: 28px;
-      }
-
-      .left,
-      .right {
-        width: 100%;
-
-        input,
-        textarea {
-          padding: 18px;
-          font-size: 15px;
+      form {
+        h1 {
+          color: #f1f1f1;
         }
 
-        button {
-          font-size: 16px;
-          padding: 18px;
+        .form-group {
+          label {
+            color: #ddd;
+          }
+
+          input, textarea {
+            background-color: #1e1e1e;
+            border-color: #444;
+            color: #f1f1f1;
+
+            &:focus {
+              border-color: #1dbf73;
+            }
+
+            &.error {
+              border-color: #ff6b6b;
+            }
+          }
+
+          .file-label {
+            background-color: #3a3a3a;
+            border-color: #444;
+            color: #ddd;
+
+            &:hover {
+              background-color: #4a4a4a;
+            }
+          }
         }
 
-        label {
-          font-size: 16px;
+        .toggle-group {
+          .toggle-label span {
+            color: #ddd;
+          }
         }
       }
     }
   }
+}
 
+@media (max-width: 768px) {
+  .register {
+    padding: 20px 15px;
 
-  @media (max-width: 480px) {
-    form {
-      flex-direction: column;
-      width: 100%;
-      gap: 40px;
-      padding: 60px 0px;
+    .container {
+      padding: 30px;
 
-      h1 {
-        font-size: 22px;
-        text-align: center;
+      form {
+        gap: 30px;
+
+        h1 {
+          font-size: 24px;
+        }
       }
+    }
+  }
+}
 
-      .left,
-      .right {
-        width: 100%;
+@media (max-width: 480px) {
+  .register {
+    padding: 15px 10px;
 
-        input,
-        textarea {
-          padding: 16px;
-          font-size: 14px;
+    .container {
+      padding: 20px;
+
+      form {
+        h1 {
+          font-size: 22px;
         }
 
-        button {
-          font-size: 15px;
-          padding: 16px;
-        }
-
-        label {
-          font-size: 14px;
+        .left, .right {
+          min-width: 100%;
         }
       }
     }

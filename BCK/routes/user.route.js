@@ -8,12 +8,12 @@ const router = express.Router();
 
 router.delete("/:id", verifyToken, deleteUser);
 router.get("/:id", getUser);
-router.put("/:id", verifyToken, updateUser); // 🌟 Kullanıcı güncelleme eklendi
+router.put("/:id", verifyToken, updateUser); 
 
 router.put("/:id/theme", verifyToken, updateDarkMode);
 
 
-// 🔥 Toplu kullanıcı bilgisi alma endpointi
+
 router.post("/batch", verifyToken, async (req, res, next) => {
   try {
     const ids = req.body.ids;

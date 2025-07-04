@@ -8,19 +8,14 @@ export const deleteUser = async (req, res) => {
   try {
     const userId = req.params.id;
 
-    // Delete all gigs posted by this user
     await Gig.deleteMany({ userId });
 
-    // Delete reviews written by this user
     await reviewModel.deleteMany({ userId });
 
-    // Delete favorites saved by this user
     await favoriteModel.deleteMany({ userId });
 
-    // Delete orders made by this user
-    await orderModel.deleteMany({ buyerId: userId }); // Assuming orders store buyerId field
+    await orderModel.deleteMany({ buyerId: userId }); 
 
-    // Finally, delete the user
     await User.findByIdAndDelete(userId);
 
     res.status(200).send("User and their related data deleted");
@@ -51,10 +46,8 @@ export const deleteGig = async (req, res) => {
   try {
     const gigId = req.params.id;
 
-    // Delete reviews associated with this gig
     await reviewModel.deleteMany({ gigId });
 
-    // Delete the gig itself
     await Gig.findByIdAndDelete(gigId);
 
     res.status(200).send("Gig and related reviews deleted");
@@ -64,7 +57,6 @@ export const deleteGig = async (req, res) => {
 };
 
 
-// Get all orders
 export const getAllOrders = async (req, res) => {
   try {
     const orders = await orderModel.find();
@@ -84,7 +76,7 @@ export const deleteOrder = async (req, res) => {
   }
 };
 
-// Get all reviews
+
 export const getAllReviews = async (req, res) => {
   try {
     const reviews = await reviewModel.find();
@@ -94,7 +86,6 @@ export const getAllReviews = async (req, res) => {
   }
 };
 
-// Delete review by ID
 export const deleteReview = async (req, res) => {
   try {
     await reviewModel.findByIdAndDelete(req.params.id);

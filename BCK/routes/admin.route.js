@@ -4,14 +4,14 @@ import { verifyAdmin } from "../middleware/verifyAdmin.js";
 
 const router = express.Router();
 
-router.get("/users", verifyAdmin, getAllUsers);        // get all users
-router.delete("/user/:id", verifyAdmin, deleteUser);   // delete user and their gigs
+router.get("/users", verifyAdmin, getAllUsers);        
+router.delete("/user/:id", verifyAdmin, deleteUser);   
 
-router.get("/gigs", verifyAdmin, getAllGigs);          // get all gigs
-router.delete("/gig/:id", verifyAdmin, deleteGig);     // delete gig by id
+router.get("/gigs", verifyAdmin, getAllGigs);          
+router.delete("/gig/:id", verifyAdmin, deleteGig);     
 
-router.get("/gigs", verifyAdmin, getAllGigs);          // get all gigs
-router.delete("/gig/:id", verifyAdmin, deleteGig);     // delete gig by id
+router.get("/gigs", verifyAdmin, getAllGigs);         
+router.delete("/gig/:id", verifyAdmin, deleteGig);    
 
 router.get("/orders", verifyAdmin, getAllOrders);
 router.delete("/order/:id", verifyAdmin, deleteOrder);

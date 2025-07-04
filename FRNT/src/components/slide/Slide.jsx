@@ -14,21 +14,28 @@ const Slide = ({ children, slidesToShow }) => {
     arrows: true,
     responsive: [
       {
-        breakpoint: 992,
+        breakpoint: 1400,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToShow: Math.min(slidesToShow, 4),
+          slidesToScroll: Math.min(slidesToShow, 4),
         },
       },
       {
-        breakpoint: 768,
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: Math.min(slidesToShow, 3),
+          slidesToScroll: Math.min(slidesToShow, 3),
+        },
+      },
+      {
+        breakpoint: 992,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
         },
       },
       {
-        breakpoint: 480,
+        breakpoint: 768,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,

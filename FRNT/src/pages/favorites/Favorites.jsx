@@ -3,10 +3,11 @@ import { useFavorites } from "../../context/FavoritesContext";
 import { useQuery } from "@tanstack/react-query";
 import newRequest from "../../utils/newRequest";
 import GigCard from "../../components/gigCard/GigCard";
+import { FiHeart, FiLoader, FiAlertCircle } from "react-icons/fi";
 import "./Favorites.scss";
 
 const Favorites = () => {
-  const { favorites, loading } = useFavorites();
+  const { favorites, loading: favoritesLoading } = useFavorites();
   const [localFavorites, setLocalFavorites] = useState([]);
 
   const { data, isLoading, error, refetch } = useQuery({
@@ -15,35 +16,60 @@ const Favorites = () => {
       newRequest
         .get(`/gigs`, { params: { ids: localFavorites.join(",") } })
         .then((res) => res.data),
-    enabled: false,
+    enabled: localFavorites.length > 0,
   });
 
   useEffect(() => {
-    if (!loading && favorites.length > 0) {
-      setLocalFavorites(favorites); // favorites hazır gələndə local state-ə ötür
+    if (!favoritesLoading && favorites.length > 0) {
+      setLocalFavorites(favorites);
     }
-  }, [favorites, loading]);
-
-  useEffect(() => {
-    if (localFavorites.length > 0) {
-      refetch();
-    }
-  }, [localFavorites]);
+  }, [favorites, favoritesLoading]);
 
   return (
     <div className="favoritesPage">
       <div className="container">
-        <h1>Your Liked Gigs</h1>
-        {loading ? (
-          <p>Loading your favorites...</p>
+        <div className="header">
+          <h1><FiHeart /> Favorite Gigs</h1>
+          {!favoritesLoading && (
+            <span className="count">{favorites.length} {favorites.length === 1 ? 'gig' : 'gigs'}</span>
+          )}
+        </div>
+
+        {favoritesLoading ? (
+          <div className="loading-state">
+            <div className="spinner">
+              <FiLoader className="loading-icon" />
+            </div>
+            <p>Loading your favorites...</p>
+          </div>
         ) : favorites.length === 0 ? (
-          <p>You haven't liked any gigs yet.</p>
+          <div className="empty-state">
+            <FiHeart className="empty-icon" />
+            <p>You haven't liked any gigs yet</p>
+            <Link to="/" className="browse-link">
+              Browse gigs
+            </Link>
+          </div>
         ) : isLoading ? (
-          <p>Loading gigs...</p>
+          <div className="loading-state">
+            <div className="spinner">
+              <FiLoader className="loading-icon" />
+            </div>
+            <p>Loading gig details...</p>
+          </div>
         ) : error ? (
-          <p>Something went wrong.</p>
+          <div className="error-state">
+            <FiAlertCircle className="error-icon" />
+            <p>Something went wrong loading your favorites</p>
+            <button 
+              className="retry-btn"
+              onClick={() => refetch()}
+            >
+              Try again
+            </button>
+          </div>
         ) : (
-          <div className="cards">
+          <div className="gigs-grid">
             {data?.map((gig) => (
               <GigCard key={gig._id} item={gig} />
             ))}

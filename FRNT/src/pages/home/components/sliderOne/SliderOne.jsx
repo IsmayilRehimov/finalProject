@@ -30,11 +30,9 @@ const SliderOne = ({ gigs, isLoading, error }) => {
         ) : topRatedGigs?.length === 0 ? (
           <p>No top rated gigs found.</p>
         ) : (
-          <Slide slidesToShow={5}>
+          <Slide slidesToShow={Math.min(topRatedGigs.length, 5)}>
             {topRatedGigs.map((gig) => (
-              <div key={gig._id}>
-                <GigCard item={gig} />
-              </div>
+              <GigCard key={gig._id} item={gig} />
             ))}
           </Slide>
         )}

@@ -2,14 +2,35 @@
   display: flex;
   justify-content: center;
   padding: 50px 0;
+  position: relative;
+  overflow: hidden;
 
   .container {
     width: 1400px;
     max-width: 100%;
     padding: 0 20px;
+    position: relative;
   }
 
-.slick-prev,
+  
+  .slick-slide {
+    padding: 0 10px;
+    box-sizing: border-box;
+    
+    > div {
+      height: 100%;
+    }
+  }
+
+  
+  .slick-slide .gigCard {
+    width: 100% !important;
+    margin: 0 auto;
+    max-width: 280px;
+  }
+
+ 
+  .slick-prev,
   .slick-next {
     z-index: 10;
     width: 40px;
@@ -23,6 +44,9 @@
     opacity: 1 !important;
     visibility: visible !important;
     transition: background-color 0.3s ease;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .slick-prev:hover,
@@ -46,14 +70,20 @@
   }
 
   .slick-prev {
-    left: -50px;
+    left: 0;
   }
 
   .slick-next {
-    right: -50px;
+    right: 0;
   }
 
-  @media (max-width: 992px) {
+  /* Slider container */
+  .slick-list {
+    margin: 0 -10px;
+    overflow: visible;
+  }
+
+  @media (max-width: 1200px) {
     padding: 40px 0;
 
     .slick-prev,
@@ -61,17 +91,9 @@
       width: 35px;
       height: 35px;
     }
-
-    .slick-prev {
-      left: -35px;
-    }
-
-    .slick-next {
-      right: -35px;
-    }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 992px) {
     padding: 30px 0;
 
     .slick-prev,
@@ -79,13 +101,33 @@
       width: 30px;
       height: 30px;
     }
+  }
 
-    .slick-prev {
-      left: -25px;
+  @media (max-width: 768px) {
+    padding: 25px 0;
+
+    .container {
+      padding: 0 15px;
     }
 
+    .slick-prev,
     .slick-next {
-      right: -25px;
+      width: 25px;
+      height: 25px;
+    }
+
+    .slick-prev::before,
+    .slick-next::before {
+      width: 8px;
+      height: 8px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 20px 0;
+
+    .container {
+      padding: 0 10px;
     }
   }
 }
@@ -102,6 +144,6 @@
 
   .slick-prev::before,
   .slick-next::before {
-    border-color: #1dbf73;
+    border-color: #fff;
   }
 }

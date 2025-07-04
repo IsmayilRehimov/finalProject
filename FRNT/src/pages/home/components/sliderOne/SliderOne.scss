@@ -2,11 +2,14 @@
   display: flex;
   justify-content: center;
   padding: 50px 0;
+  position: relative;
+  
 
   .container {
     width: 1400px;
     max-width: 100%;
     padding: 0 20px;
+    position: relative;
   }
 
   h2 {
@@ -15,58 +18,128 @@
     margin-bottom: 20px;
   }
 
-  @media (max-width: 1200px) {
-    padding: 40px 0;
-
-    .container {
-      width: 1000px;
+  /* Slider container adjustments */
+  .slide {
+    .slick-list {
+      margin: 0 -10px;
+      padding: 10px 0;
     }
 
-    h2 {
-      font-size: 22px;
-    }
-  }
-
-  @media (max-width: 992px) {
-    padding: 30px 0;
-
-    .container {
-      width: 750px;
-    }
-
-    h2 {
-      font-size: 20px;
+    .slick-slide {
+      padding: 0 10px;
+      box-sizing: border-box;
+      
+      > div {
+        height: 100%;
+      }
     }
   }
 
-  @media (max-width: 768px) {
-    padding: 25px 0;
+  /* Navigation arrows - improved positioning */
+  .slick-prev,
+  .slick-next {
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    background-color: #1dbf73;
+    border-radius: 50%;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 1 !important;
+    transition: all 0.3s ease;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    &:hover {
+      background-color: #17a864;
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    &::before {
+      content: "";
+      display: block;
+      width: 10px;
+      height: 10px;
+      border-top: 2px solid #fff;
+      border-right: 2px solid #fff;
+    }
+  }
+
+  .slick-prev {
+    left: 0;
+
+    &::before {
+      transform: rotate(-135deg);
+      margin-right: 2px;
+    }
+  }
+
+  .slick-next {
+    right: 0;
+
+    &::before {
+      transform: rotate(45deg);
+      margin-left: 2px;
+    }
+  }
+
+  /* Mobile-specific adjustments */
+  @media (max-width: 500px) {
+    padding: 40px 20px ;
 
     .container {
-      width: 100%;
       padding: 0 15px;
     }
 
-    h2 {
-      font-size: 18px;
+    /* Full-width card only when single slide */
+    .slick-slide {
+      padding: 0 5px;
+      
+      .gigCard {
+        width: calc(100% - 10px) !important;
+        min-width: auto;
+        max-width: none;
+      }
+    }
+
+    /* Bring arrows closer to content */
+    .slick-prev {
+      left: 5px;
+    }
+
+    .slick-next {
+      right: 5px;
     }
   }
 
-  @media (max-width: 480px) {
-    padding: 20px 0;
-
-    .container {
-      width: 100%;
-      padding: 0 10px;
-    }
-
-    h2 {
-      font-size: 16px;
+  @media (min-width: 501px) {
+    /* Ensure cards maintain fixed width on larger screens */
+    .gigCard {
+      width: 250px !important;
+      min-width: 250px;
+      max-width: 250px;
     }
   }
-}
 
-.app.dark .sliderOne {
-  background-color: #1a1a1a;
-  color: #eee;
+  /* Dark mode styles */
+  .app.dark & {
+    background-color: #1a1a1a;
+    color: #eee;
+
+    .slick-prev,
+    .slick-next {
+      background-color: #333;
+
+      &:hover {
+        background-color: #444;
+      }
+
+      &::before {
+        border-color: #fff;
+      }
+    }
+  }
 }

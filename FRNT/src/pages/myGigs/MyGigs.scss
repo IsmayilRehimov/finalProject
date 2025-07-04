@@ -1,220 +1,364 @@
 .myGigs {
   display: flex;
   justify-content: center;
-  color: #555;
-  padding: 20px;
+  min-height: calc(100vh - 100px);
+  padding: 30px 20px;
+  background-color: #f8f9fa;
 
   .container {
-    width: 1400px;
-    max-width: 95%;
-    padding: 50px 0;
+    width: 100%;
+    max-width: 1200px;
 
-    .title {
+    .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 30px;
       flex-wrap: wrap;
       gap: 15px;
-      margin-bottom: 30px;
 
-      button {
+      .title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        h1 {
+          margin: 0;
+          font-size: 24px;
+          color: #333;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .count {
+          background-color: #e9f9f1;
+          color: #1dbf73;
+          padding: 6px 12px;
+          border-radius: 20px;
+          font-size: 14px;
+          font-weight: 500;
+        }
+      }
+
+      .add-button {
         background-color: #1dbf73;
         color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
         font-weight: 500;
+        transition: background-color 0.2s;
+
+        &:hover {
+          background-color: #19a463;
+        }
+      }
+    }
+
+    .loading-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      padding: 40px 0;
+
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid rgba(29, 191, 115, 0.2);
+        border-radius: 50%;
+        border-top-color: #1dbf73;
+        animation: spin 1s linear infinite;
+      }
+
+      p {
+        color: #666;
+        font-size: 16px;
+      }
+    }
+
+    .error-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      padding: 40px 0;
+      background-color: #ffecec;
+      border-radius: 8px;
+      max-width: 500px;
+      margin: 0 auto;
+
+      p {
+        color: #ff6b6b;
+        font-size: 16px;
+        text-align: center;
+      }
+
+      button {
+        background-color: #ff6b6b;
+        color: white;
         border: none;
         padding: 10px 20px;
         border-radius: 5px;
         cursor: pointer;
-        transition: 0.3s ease;
+        transition: background-color 0.2s;
 
         &:hover {
-          background-color: #159c5c;
+          background-color: #ff5252;
         }
       }
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background-color: white;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 60px 0;
+      text-align: center;
 
-      tr {
-        height: 50px;
-
-        th {
-          text-align: left;
-          padding: 15px;
-          background-color: #f5f5f5;
-          font-weight: 600;
-          font-size: 16px;
-        }
-
-        td {
-          padding: 15px;
-          vertical-align: middle;
-          font-size: 15px;
-
-          sup {
-            font-size: 12px;
-          }
-
-          .image {
-            width: 50px;
-            height: 25px;
-            object-fit: cover;
-            border-radius: 3px;
-          }
-
-          .delete {
-            width: 20px;
-            cursor: pointer;
-            transition: 0.3s ease;
-
-            &:hover {
-              transform: scale(1.2);
-            }
-          }
-        }
-        .gigLink {
-  color: inherit;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: #1dbf73;
-    text-decoration: underline;
-  }
-}
-
-
-        &:nth-child(even) {
-          background-color: #1dbf730f;
-        }
-      }
-    }
-  }
-
-  
-  @media (max-width: 768px) {
-    .container {
-      padding: 30px 0;
-
-      .title {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-
-        button {
-          padding: 8px 15px;
-          font-size: 14px;
-        }
+      p {
+        color: #666;
+        font-size: 16px;
       }
 
-      table {
-        tr {
-          th,
-          td {
-            padding: 12px;
-            font-size: 14px;
-          }
-
-          td {
-            .image {
-              width: 40px;
-              height: 20px;
-            }
-
-            .delete {
-              width: 18px;
-            }
-          }
-        }
-      }
-    }
-  }
-
-
-  @media (max-width: 480px) {
-    .container {
-      .title {
-        h1 {
-          font-size: 20px;
-        }
-
-        button {
-          padding: 6px 12px;
-          font-size: 12px;
-        }
-      }
-
-      table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-
-        tr {
-          th,
-          td {
-            padding: 10px;
-            font-size: 12px;
-          }
-
-          td {
-            .image {
-              width: 35px;
-              height: 18px;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-
-.app.dark .myGigs {
-  color: #f1f1f1;
-  background-color: #1a1a1a; // sayfanın arka planı için
-
-  .container {
-    .title {
-      button {
+      .add-button {
         background-color: #1dbf73;
         color: white;
+        padding: 12px 24px;
+        border-radius: 5px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 500;
+        transition: background-color 0.2s;
 
         &:hover {
-          background-color: #159c5c;
+          background-color: #19a463;
         }
       }
     }
 
-    table {
-      background-color: #2a2a2a;
-      box-shadow: 0 0 5px rgba(255, 255, 255, 0.05);
+    .gigs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
 
-      tr {
-        th {
-          background-color: #3a3a3a;
-          color: #f1f1f1;
+      .gig-card {
+        background-color: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s, box-shadow 0.2s;
+        display: flex;
+        flex-direction: column;
+
+        &:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        td {
-          color: #e0e0e0;
+        .gig-image-link {
+          display: block;
+          height: 180px;
+          overflow: hidden;
 
-          .gigLink {
-            color: inherit;
+          .gig-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+          }
+
+          &:hover .gig-image {
+            transform: scale(1.05);
+          }
+        }
+
+        .gig-details {
+          padding: 16px;
+          flex-grow: 1;
+
+          .gig-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            text-decoration: none;
+            display: block;
+            transition: color 0.2s;
 
             &:hover {
               color: #1dbf73;
             }
           }
+
+          .gig-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+
+            .price {
+              font-weight: 700;
+              color: #1dbf73;
+              font-size: 16px;
+              display: flex;
+              align-items: center;
+              gap: 4px;
+            }
+
+            .sales {
+              font-size: 14px;
+              color: #888;
+            }
+          }
         }
 
-        &:nth-child(even) {
-          background-color: rgba(29, 191, 115, 0.1);
+        .gig-actions {
+          display: flex;
+          border-top: 1px solid #eee;
+          padding: 12px;
+
+          .delete-button {
+            flex: 1;
+            background-color: #ffecec;
+            color: #ff6b6b;
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-left: 8px;
+            transition: background-color 0.2s;
+
+            &:hover {
+              background-color: #ffdddd;
+            }
+          }
         }
+      }
+    }
+  }
+}
+
+// Dark mode styles
+.app.dark {
+  .myGigs {
+    background-color: #121212;
+
+    .container {
+      .header {
+        .title {
+          h1 {
+            color: #f1f1f1;
+          }
+
+          .count {
+            background-color: rgba(29, 191, 115, 0.1);
+          }
+        }
+      }
+
+      .loading-state {
+        p {
+          color: #aaa;
+        }
+      }
+
+      .empty-state {
+        p {
+          color: #aaa;
+        }
+      }
+
+      .gigs-grid {
+        .gig-card {
+          background-color: #2a2a2a;
+
+          .gig-details {
+            .gig-title {
+              color: #f1f1f1;
+
+              &:hover {
+                color: #1dbf73;
+              }
+            }
+
+            .gig-meta {
+              .sales {
+                color: #aaa;
+              }
+            }
+          }
+
+          .gig-actions {
+            border-top-color: #444;
+
+            .edit-button {
+              background-color: #3a3a3a;
+              color: #ddd;
+
+              &:hover {
+                background-color: #4a4a4a;
+              }
+            }
+
+            .delete-button {
+              background-color: rgba(255, 107, 107, 0.1);
+              color: #ff6b6b;
+
+              &:hover {
+                background-color: rgba(255, 107, 107, 0.2);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+  .myGigs {
+    padding: 20px 15px;
+
+    .container {
+      .gigs-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .myGigs {
+    padding: 15px 10px;
+
+    .container {
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+
+      .gigs-grid {
+        grid-template-columns: 1fr;
       }
     }
   }

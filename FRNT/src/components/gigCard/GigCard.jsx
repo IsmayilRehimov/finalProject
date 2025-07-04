@@ -5,6 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 import newRequest from "../../utils/newRequest";
 import { useFavorites } from "../../context/FavoritesContext";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { IoStar, IoStarHalf, IoStarOutline } from "react-icons/io5";
+import { FiClock } from "react-icons/fi";
 
 const GigCard = ({ item }) => {
   const { isLoading, error, data } = useQuery({
@@ -19,45 +21,97 @@ const GigCard = ({ item }) => {
   const averageRating =
     item.starNumber > 0 ? (item.totalStars / item.starNumber).toFixed(1) : 0;
 
+  const renderStars = (rating) => {
+    const stars = [];
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
+
+    for (let i = 1; i <= 5; i++) {
+      if (i <= fullStars) {
+        stars.push(<IoStar key={i} className="star filled" />);
+      } else if (i === fullStars + 1 && hasHalfStar) {
+        stars.push(<IoStarHalf key={i} className="star filled" />);
+      } else {
+        stars.push(<IoStarOutline key={i} className="star" />);
+      }
+    }
+
+    return stars;
+  };
+
   return (
     <div className="gigCard">
-      <Link to={`/gig/${item._id}`} className="cardTop">
-        <img src={item.cover || "/img/noimage.jpg"} alt="gig" className="cover" />
-        <div className="userInfo">
-          {isLoading ? (
-            "Loading..."
-          ) : error ? (
-            "Something went wrong!"
-          ) : (
-            <>
-              <img src={data?.img || "/img/noavatar.jpg"} alt="user" />
-              <span>{data?.username}</span>
-            </>
-          )}
-        </div>
-      </Link>
+      <div className="cardTop">
+        <Link to={`/gig/${item._id}`} className="imageLink">
+          <img
+            src={item.cover || "/img/noimage.jpg"}
+            alt={item.title}
+            className="cover"
+            loading="lazy"
+          />
+          <div className="deliveryBadge">
+            <FiClock className="clockIcon" />
+            <span>
+              {typeof item.deliveryTime === "number" && item.deliveryTime > 0
+                ? `${item.deliveryTime} day delivery`
+                : "N/A delivery"}
+            </span>
+          </div>
+        </Link>
+
+        <button
+          className={`likeButton ${liked ? "liked" : ""}`}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleFavorite(item._id);
+          }}
+          aria-label={liked ? "Remove from favorites" : "Add to favorites"}
+        >
+          {liked ? <AiFillHeart size={20} /> : <AiOutlineHeart size={20} />}
+        </button>
+      </div>
 
       <div className="cardContent">
-        <p className="desc">{item.desc}</p>
+        <Link to={`/gig/${item._id}`} className="gigLink">
+          <div className="userInfo">
+            {isLoading ? (
+              <div className="userLoading">Loading...</div>
+            ) : error ? (
+              <div className="userError">Error</div>
+            ) : (
+              <>
+                <img
+                  src={data?.img || "/img/noavatar.jpg"}
+                  alt={data?.username}
+                  className="userAvatar"
+                />
+                <span className="username">{data?.username}</span>
+              </>
+            )}
+          </div>
 
-        <div className="star">
-          <img src="/img/star.png" alt="star" />
-          <span>{averageRating}</span>
-          <span className="count">({item.starNumber || 0})</span>
+          <h3 className="gigTitle" title={item.title}>
+            {item.title}
+          </h3>
+          <p className="gigDesc" title={item.desc}>
+            {item.desc}
+          </p>
+        </Link>
+
+        <div className="ratingInfo">
+          <div className="stars">
+            {renderStars(averageRating)}
+            <span className="ratingValue">{averageRating}</span>
+          </div>
+          <span className="reviewCount">({item.starNumber || 0})</span>
         </div>
       </div>
 
       <div className="cardBottom">
-        <div className={`likeIcon ${liked ? "liked" : ""}`} onClick={() => toggleFavorite(item._id)}>
-          {liked ? (
-            <AiFillHeart size={22} />
-          ) : (
-            <AiOutlineHeart size={22} />
-          )}
-        </div>
-        <div className="price">
-          <span>Starting at</span>
-          <h2>${item.price}</h2>
+        <div className="priceInfo">
+          <span className="startingAt">Starting at</span>
+          <span className="price">${item.price}</span>
         </div>
       </div>
     </div>

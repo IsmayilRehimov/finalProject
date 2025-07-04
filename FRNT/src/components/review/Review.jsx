@@ -4,7 +4,7 @@ import newRequest from "../../utils/newRequest";
 import "./Review.scss";
 
 const Review = ({ review }) => {
-  const [helpful, setHelpful] = useState(null); // 'like' ya da 'dislike'
+  const [helpful, setHelpful] = useState(null); 
 
   const { isLoading, error, data } = useQuery({
     queryKey: [review.userId],

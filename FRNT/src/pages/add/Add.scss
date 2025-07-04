@@ -1,216 +1,451 @@
 .add {
   display: flex;
   justify-content: center;
-   padding: 50px 0;
+  min-height: 100vh;
+  padding: 30px 15px;
+  background-color: #f8f9fa;
 
   .container {
     width: 100%;
     max-width: 1200px;
-    padding: 40px 20px;
-    background-color: #fff;     // varsayılan açık mod
-    border-radius: 10px;
-    border: 1px solid #ddd;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 30px;
     box-sizing: border-box;
 
-    h1 {
+    .header {
       margin-bottom: 30px;
-      color: gray;
-      font-weight: 300;
-      font-size: 28px;
-    }
 
-    .sections {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
-
-      label {
-        color: gray;
-        font-size: 16px;
-      }
-
-      .info,
-      .details {
-        flex: 1 1 100%;
+      h1 {
+        font-size: 26px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 8px;
         display: flex;
-        flex-direction: column;
+        align-items: center;
         gap: 10px;
 
-        input,
-        select,
+        .icon {
+          color: #1dbf73;
+        }
+      }
+
+      p {
+        color: #666;
+        font-size: 15px;
+        margin: 0;
+        line-height: 1.5;
+      }
+    }
+
+    .gig-form {
+      .form-sections {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 30px;
+
+        @media (min-width: 992px) {
+          grid-template-columns: 2fr 1fr;
+        }
+      }
+
+      .form-group {
+        margin-bottom: 22px;
+        position: relative;
+
+        label {
+          display: block;
+          margin-bottom: 10px;
+          font-weight: 500;
+          color: #444;
+          font-size: 15px;
+
+          svg {
+            margin-right: 6px;
+            color: #666;
+          }
+        }
+
+        input, select, textarea {
+          width: 100%;
+          padding: 12px 14px;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          font-size: 15px;
+          transition: border-color 0.2s, box-shadow 0.2s;
+          box-sizing: border-box;
+
+          &:focus {
+            outline: none;
+            border-color: #1dbf73;
+            box-shadow: 0 0 0 2px rgba(29, 191, 115, 0.2);
+          }
+        }
+
         textarea {
-          padding: 16px;
-          font-size: 14px;
-          border: 1px solid #ccc;
-          border-radius: 5px;
-          background-color: #fff;
-          color: #333;
+          min-height: 120px;
+          resize: vertical;
         }
 
-        .images {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
+        &.short-input {
+          max-width: 400px;
+          
+          @media (max-width: 768px) {
+            max-width: 100%;
+          }
+        }
 
-          .imagesInputs {
+        .error-message {
+          color: #e74c3c;
+          font-size: 13px;
+          margin-top: 6px;
+          display: none;
+          
+          &.visible {
+            display: block;
+          }
+        }
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+
+        @media (min-width: 576px) {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .image-upload {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+
+        .upload-group {
+          margin-bottom: 15px;
+
+          .file-input {
+            position: relative;
             display: flex;
-            flex-direction: column;
-            gap: 10px;
-          }
-        }
+            align-items: center;
+            padding: 12px 16px;
+            background-color: white;
+            border: 1px dashed #ccc;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: border-color 0.2s;
 
-        .add {
-          display: flex;
-          gap: 10px;
+            &:hover {
+              border-color: #1dbf73;
+            }
 
-          input {
-            flex: 1;
-          }
-        }
+            .upload-icon {
+              margin-right: 10px;
+              color: #666;
+            }
 
-        .addedFeatures {
-          display: flex;
-          gap: 10px;
-          flex-wrap: wrap;
-
-          .item {
-            button {
-              height: 32px;
-              font-size: 12px;
-              font-weight: 500;
-              background-color: #1dbf73;
+            span {
+              color: #555;
+              font-size: 14px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+            label{
               color: white;
-              border: none;
-              border-radius: 4px;
-              display: flex;
-              align-items: center;
-              gap: 8px;
-              padding: 0 10px;
-              cursor: pointer;
-              transition: all 0.3s ease;
+            }
 
-              &:hover {
-                background-color: #159c5c;
-              }
+            input[type="file"] {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              opacity: 0;
+              cursor: pointer;
+            }
+          }
+        }
+
+        .upload-btn {
+          background-color: #1dbf73;
+          color: white;
+          border: none;
+          padding: 12px 20px;
+          border-radius: 8px;
+          font-weight: 500;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          transition: background-color 0.2s;
+          width: 100%;
+
+          &:hover {
+            background-color: #19a463;
+          }
+
+          &:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+          }
+        }
+
+        .upload-status {
+          margin-top: 10px;
+
+          .success {
+            color: #1dbf73;
+            font-size: 13px;
+            font-weight: 500;
+          }
+        }
+      }
+
+      .add-feature {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 16px;
+
+        input {
+          flex: 1;
+          padding: 12px 14px;
+        }
+
+        .add-feature-btn {
+          background-color: #1dbf73;
+          color: white;
+          border: none;
+          border-radius: 6px;
+          padding: 0 16px;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          cursor: pointer;
+          transition: background-color 0.2s;
+
+          &:hover {
+            background-color: #19a463;
+          }
+        }
+      }
+
+      .features-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+
+        .feature-tag {
+          background-color: #e9f9f1;
+          color: #1dbf73;
+          padding: 6px 12px;
+          border-radius: 20px;
+          font-size: 13px;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+
+          button {
+            background: none;
+            border: none;
+            color: #1dbf73;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+
+            &:hover {
+              color: #159c5c;
             }
           }
         }
       }
-    }
 
-    button,
-    .createBtn,
-    .uploadBtn,
-    .addFeatureBtn {
-      background-color: #1dbf73;
-      color: white;
-      border: none;
-      padding: 12px 18px;
-      font-size: 14px;
-      font-weight: 500;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
+      .form-actions {
+        margin-top: 30px;
+        display: flex;
+        justify-content: flex-end;
 
-      &:hover {
-        background-color: #159c5c;
-      }
-    }
+        .submit-btn {
+          background-color: #1dbf73;
+          color: white;
+          border: none;
+          padding: 14px 28px;
+          border-radius: 8px;
+          font-weight: 500;
+          font-size: 16px;
+          cursor: pointer;
+          transition: background-color 0.2s;
+          min-width: 180px;
 
-    .createBtn {
-      margin-top: 30px;
-      max-width: 200px;
-      align-self: center;
-    }
-  }
+          &:hover {
+            background-color: #19a463;
+          }
 
-  /* dark mode */
-  .app.dark & {
-    .container {
-      background-color: #1e1e1e;
-      border-color: #444;
-
-      h1 {
-        color: #f1f1f1;
-      }
-
-      .sections {
-        label {
-          color: #ddd;
-        }
-
-        .info,
-        .details {
-          input,
-          select,
-          textarea {
-            background-color: #121212;
-            color: #f1f1f1;
-            border-color: #555;
+          &:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
           }
         }
       }
     }
   }
+}
 
-  @media (max-width: 768px) {
+/* Dark mode styles */
+.app.dark {
+  .add {
+    background-color: #121212;
+
     .container {
-      padding: 20px;
+      background-color: #1e1e1e;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 
-      h1 {
-        font-size: 22px;
-      }
-
-      .sections {
-        gap: 20px;
-      }
-
-      .info,
-      .details {
-        input,
-        select,
-        textarea {
-          padding: 14px;
-          font-size: 13px;
+      .header {
+        h1 {
+          color: #f1f1f1;
         }
 
-        label {
-          font-size: 14px;
+        p {
+          color: #aaa;
         }
       }
 
-      .createBtn {
-        font-size: 14px;
-        padding: 10px;
+      .gig-form {
+        .form-group {
+          label {
+            color: #ddd;
+
+            svg {
+              color: #aaa;
+            }
+          }
+
+          input, select, textarea {
+            background-color: #2a2a2a;
+            border-color: #444;
+            color: #f1f1f1;
+
+            &:focus {
+              border-color: #1dbf73;
+              box-shadow: 0 0 0 2px rgba(29, 191, 115, 0.3);
+            }
+          }
+        }
+
+        .image-upload {
+          background-color: #2a2a2a;
+
+          .file-input {
+            background-color: #333;
+            border-color: #444;
+
+            span {
+              color: #ddd;
+            }
+
+            .upload-icon {
+              color: #aaa;
+            }
+          }
+        }
+
+        .features-list {
+          .feature-tag {
+            background-color: rgba(29, 191, 115, 0.1);
+          }
+        }
       }
     }
   }
+}
 
-  @media (max-width: 480px) {
+/* Responsive Breakpoints */
+@media (max-width: 992px) {
+  .add {
     .container {
-      padding: 10px;
-
-      h1 {
-        font-size: 20px;
-      }
-
-      .info,
-      .details {
-        input,
-        select,
-        textarea {
-          padding: 12px;
-          font-size: 12px;
-        }
-
-        label {
-          font-size: 13px;
+      padding: 25px;
+      
+      .header {
+        h1 {
+          font-size: 24px;
         }
       }
+    }
+  }
+}
 
-      .createBtn {
-        font-size: 13px;
-        padding: 10px;
+@media (max-width: 768px) {
+  .add {
+    padding: 20px 10px;
+    
+    .container {
+      padding: 20px;
+      
+      .header {
+        h1 {
+          font-size: 22px;
+        }
+        
+        p {
+          font-size: 14px;
+        }
+      }
+      
+      .gig-form {
+        .form-sections {
+          gap: 25px;
+        }
+        
+        .form-actions {
+          .submit-btn {
+            width: 100%;
+            padding: 12px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .add {
+    padding: 15px 8px;
+    
+    .container {
+      padding: 18px;
+      
+      .header {
+        margin-bottom: 20px;
+        
+        h1 {
+          font-size: 20px;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 5px;
+        }
+      }
+      
+      .gig-form {
+        .form-group {
+          margin-bottom: 18px;
+          
+          input, select, textarea {
+            padding: 10px 12px;
+          }
+        }
+        
+        .add-feature {
+          flex-direction: column;
+          
+          input {
+            width: 100%;
+          }
+        }
       }
     }
   }

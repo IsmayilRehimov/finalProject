@@ -1,7 +1,34 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./Features.scss";
 
 const Features = () => {
+  const videoRef = useRef();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            videoRef.current.play();
+          } else {
+            videoRef.current.pause();
+          }
+        });
+      },
+      { threshold: 0.5 } // %50 si görünürse tetiklenir
+    );
+
+    if (videoRef.current) {
+      observer.observe(videoRef.current);
+    }
+
+    return () => {
+      if (videoRef.current) {
+        observer.unobserve(videoRef.current);
+      }
+    };
+  }, []);
+
   return (
     <div className="features">
       <div className="container">
@@ -38,7 +65,7 @@ const Features = () => {
           </p>
         </div>
         <div className="item">
-          <video src="./img/video1.mp4" controls />
+          <video ref={videoRef} src="./img/video1.mp4" controls muted />
         </div>
       </div>
     </div>

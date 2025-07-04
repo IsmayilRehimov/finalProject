@@ -14,6 +14,8 @@ const SliderTwo = ({ gigs, isLoading, error }) => {
         setSlidesToShow(2);
       } else if (window.innerWidth <= 992) {
         setSlidesToShow(3);
+      } else if (window.innerWidth <= 1200) {
+        setSlidesToShow(4);
       } else {
         setSlidesToShow(5);
       }

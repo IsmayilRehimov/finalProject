@@ -1,331 +1,358 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 .gigCard {
-  flex: none;
-  width: 250px; /* Sabit en */
-  max-width: 250px;
-  min-width: 250px;
-  background: linear-gradient(135deg, #f0fff9, #e3fff2, #d0ffe7);
-  border: 1px solid #ddd;
-  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  max-width: 320px;
+  background: #ffffff;
+  border-radius: 16px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  font-family: 'Inter', sans-serif;
+  position: relative;
+  border: 1px solid #f0f0f0;
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    border-color: #e0e0e0;
   }
 
   .cardTop {
     position: relative;
-    text-decoration: none;
+    width: 100%;
+    height: 180px;
+    
+    .imageLink {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
 
     .cover {
       width: 100%;
-      height: 180px;
+      height: 100%;
       object-fit: cover;
+      transition: transform 0.3s ease;
     }
 
-    .userInfo {
+    &:hover .cover {
+      transform: scale(1.02);
+    }
+
+    .deliveryBadge {
       position: absolute;
-      bottom: 10px;
-      left: 10px;
-      background: rgba(255, 255, 255, 0.9);
-      padding: 4px 8px;
+      bottom: 12px;
+      left: 12px;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 6px 10px;
       border-radius: 20px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      backdrop-filter: blur(2px);
+      z-index: 1;
 
-      img {
-        width: 26px;
-        height: 26px;
-        border-radius: 50%;
-        object-fit: cover;
+      .clockIcon {
+        font-size: 12px;
+      }
+    }
+
+    .likeButton {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      z-index: 2;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+      svg {
+        transition: all 0.2s ease;
+        color: #555;
       }
 
-      span {
-        font-size: 14px;
-        color: #111;
-        font-weight: 500;
+      &:hover {
+        transform: scale(1.1);
+        background: rgba(255, 255, 255, 1);
+      }
+
+      &.liked {
+        svg {
+          color: #ff4d4d;
+          fill: #ff4d4d;
+        }
       }
     }
   }
 
   .cardContent {
-    padding: 12px 16px;
-    flex-grow: 1;
+    padding: 16px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
+    flex-grow: 1;
+    min-height: 180px;
 
-    .desc {
-      color: #333;
-      font-size: 14px;
-      line-height: 1.4;
-      height: 42px;
-      overflow: hidden;
-      text-overflow: ellipsis;
+    .gigLink {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      height: 100%;
+    }
+
+    .userInfo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+      min-height: 28px;
+
+      .userAvatar {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
+        border: 1px solid #f0f0f0;
+      }
+
+      .username {
+        font-size: 14px;
+        font-weight: 500;
+        color: #1dbf73;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .userLoading, .userError {
+        font-size: 12px;
+        color: #999;
+        white-space: nowrap;
+      }
+    }
+
+    .gigTitle {
+      font-size: 16px;
+      font-weight: 600;
+      color: #222;
+      margin: 0;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.4;
+      max-height: 2.8em;
+      min-height: 2.8em;
     }
 
-    .star {
+    .gigDesc {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.5;
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-height: 3em;
+      min-height: 3em;
+    }
+
+    .ratingInfo {
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
+      margin-top: auto;
+      min-height: 20px;
 
-      img {
-        width: 14px;
-        height: 14px;
+      .stars {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+
+        .star {
+          color: #e0e0e0;
+          font-size: 14px;
+
+          &.filled {
+            color: #ffb700;
+          }
+        }
       }
 
-      span {
+      .ratingValue {
         font-size: 14px;
-        font-weight: bold;
-        color: #ff9800;
+        font-weight: 600;
+        color: #333;
+        margin-left: 4px;
       }
 
-      .count {
-        color: #777;
+      .reviewCount {
         font-size: 12px;
+        color: #999;
       }
     }
   }
 
   .cardBottom {
-  padding: 12px 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: linear-gradient(90deg, #e6f9f2, #f9fffc);
+    padding: 14px 16px;
+    border-top: 1px solid #f5f5f5;
+    background-color: #fafafa;
+    flex-shrink: 0;
 
-  border-top: 1px solid #ddd;
+    .priceInfo {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
 
-  .likeIcon {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s ease;
+      .startingAt {
+        font-size: 12px;
+        color: #999;
+        margin-bottom: 2px;
+      }
 
-    svg {
-      color: #555;
-      transition: color 0.2s ease;
-    }
-
-    &.liked svg {
-      color: #ff4d4d;
-    }
-
-    &:hover {
-      transform: scale(1.2);
-    }
-  }
-
-  .price {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-
-    span {
-      font-size: 12px;
-      color: #999;
-    }
-
-    h2 {
-      font-size: 18px;
-      color: #222;
-      font-weight: 600;
+      .price {
+        font-size: 18px;
+        font-weight: 700;
+        color: #222;
+      }
     }
   }
 }
 
-}
-
-// Tablet üçün
+// Tablet styles (768px - 1024px)
 @media (max-width: 1024px) {
   .gigCard {
     max-width: 280px;
 
-    .cardTop {
-      .cover {
-        height: 160px;
-      }
-
-      .userInfo {
-        padding: 3px 6px;
-
-        img {
-          width: 24px;
-          height: 24px;
-        }
-
-        span {
-          font-size: 13px;
-        }
-      }
-    }
-
     .cardContent {
-      padding: 10px 14px;
-      gap: 8px;
+      padding: 14px;
+      min-height: 170px;
 
-      .desc {
+      .gigTitle {
+        font-size: 15px;
+        max-height: 2.6em;
+        min-height: 2.6em;
+      }
+
+      .gigDesc {
         font-size: 13px;
-        height: 38px;
-      }
-
-      .star {
-        img {
-          width: 13px;
-          height: 13px;
-        }
-
-        span {
-          font-size: 13px;
-        }
-
-        .count {
-          font-size: 11px;
-        }
-      }
-    }
-
-    .cardBottom {
-      padding: 10px 14px;
-
-      .likeIcon svg {
-        width: 20px;
-        height: 20px;
-      }
-
-      .price {
-        h2 {
-          font-size: 16px;
-        }
-
-        span {
-          font-size: 11px;
-        }
+        max-height: 2.8em;
+        min-height: 2.8em;
       }
     }
   }
 }
 
-// Mobil üçün
-@media (max-width: 480px) {
+// Mobile styles (up to 767px)
+@media (max-width: 767px) {
   .gigCard {
-    min-width: 100%;
     max-width: 100%;
 
     .cardTop {
-      .cover {
-        height: 140px;
-      }
-
-      .userInfo {
-        padding: 2px 5px;
-
-        img {
-          width: 22px;
-          height: 22px;
-        }
-
-        span {
-          font-size: 12px;
-        }
-      }
+      height: 160px;
     }
 
     .cardContent {
-      padding: 10px 12px;
-      gap: 6px;
+      min-height: 160px;
 
-      .desc {
-        font-size: 12px;
-        height: 36px;
-      }
-
-      .star {
-        img {
-          width: 12px;
-          height: 12px;
-        }
-
-        span {
-          font-size: 12px;
-        }
-
-        .count {
-          font-size: 10px;
-        }
-      }
-    }
-
-    .cardBottom {
-      padding: 10px 12px;
-
-      .likeIcon svg {
-        width: 18px;
-        height: 18px;
-      }
-
-      .price {
-        h2 {
-          font-size: 15px;
-        }
-
-        span {
-          font-size: 10px;
-        }
+      .gigTitle {
+        font-size: 16px;
+        max-height: 2.8em;
+        min-height: 2.8em;
       }
     }
   }
 }
 
-
-/* DARK MODE */
+// Dark mode styles
 .app.dark .gigCard {
-  background: linear-gradient(135deg, #2b2b2b, #1f1f1f);
-  border: 1px solid #444;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  background-color: #121212;
+  border-color: #333;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 
-  .cardTop .userInfo {
-    background: rgba(50, 50, 50, 0.9);
+  &:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    border-color: #444;
+  }
 
-    span {
-      color: #f1f1f1;
+  .cardTop {
+    .deliveryBadge {
+      background: rgba(0, 0, 0, 0.9);
+    }
+
+    .likeButton {
+      background: rgba(30, 30, 30, 0.9);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+
+      svg {
+        color: #aaa;
+      }
+
+      &:hover {
+        background: rgba(40, 40, 40, 0.95);
+      }
     }
   }
 
-  .cardContent .desc {
-    color: #ccc;
-  }
+  .cardContent {
+    .userInfo {
+      .username {
+        color: #1dbf73;
+      }
+    }
 
-  .cardContent .star .count {
-    color: #aaa;
+    .gigTitle {
+      color: #f5f5f5;
+    }
+
+    .gigDesc {
+      color: #aaa;
+    }
+
+    .ratingInfo {
+      .ratingValue {
+        color: #f5f5f5;
+      }
+
+      .reviewCount {
+        color: #777;
+      }
+    }
   }
 
   .cardBottom {
-    background: #2a2a2a;
+    background-color: #181818;
+    border-top: 1px solid #333;
 
-    .price h2 {
-      color: #f1f1f1;
-    }
+    .priceInfo {
+      .startingAt {
+        color: #777;
+      }
 
-    .price span {
-      color: #aaa;
-    }
-
-    .likeIcon svg {
-      color: #aaa;
-    }
-
-    .likeIcon.liked svg {
-      color: #ff4d4d;
+      .price {
+        color: #f5f5f5;
+      }
     }
   }
 }
